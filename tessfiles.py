@@ -13,10 +13,31 @@ from datetime import datetime
 from jinja2 import Environment, PackageLoader
 env = Environment(loader=PackageLoader('tessfiles', 'templates'))
 
+class Charactere(object):
+    """Caractère d'une ligne"""
+    def __init__(self, char, ligne):
+        self.char = char
+        self.ligne = ligne
+
+    @property
+    def aire_boite(self):
+        """Aire de la boîte dans laquelle le caractère a été identifié"""
+        return (self.char['x2'] - self.char['x1']) * (self.char['y2'] - self.char['y1'])
+
+    @property
+    def distance_baseline(self):
+        return  self.char['y2'] - self.ligne.y2
+
+    def is_indice(self):
+        d_y1 = ((self.char['y1'] - self.ligne.moy_y1) ** 2) ** .5
+        d_y2 = ((self.char['y2'] - self.ligne.moy_y2) ** 2) ** .5
+      
+        return (d_y1 / self.ligne.moy_d_y1, d_y2 / self.ligne.moy_d_y2)
+        
+
 class Ligne(object):
     """Ligne d'une page"""
     def __init__(self,ligne, chars):
-        self.chars = chars
         #On trouve le X le plus à "gauche"
         self.ligne = ligne
         if chars:
@@ -27,6 +48,15 @@ class Ligne(object):
 
             self.longueur = x2-x1
             self.hauteur = y2-y1
+
+            self.chars = [Charactere(c, self) for c in chars]
+    
+            self.moy_y1 = sum([c['y1'] for c in chars]) / len(chars)
+            self.moy_y2 = sum([c['y2'] for c in chars]) / len(chars)
+
+            self.moy_d_y1 = sum([((c['y1'] - self.moy_y1) ** 2) ** .5 for c in chars])
+            self.moy_d_y2 = sum([((c['y2'] - self.moy_y2) ** 2) ** .5 for c in chars])
+
 
     def __str__(self):
         return str(self.chars)
