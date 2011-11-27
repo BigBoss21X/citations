@@ -7,29 +7,44 @@ from jinja2 import Environment, PackageLoader
 import numpy as np
 env = Environment(loader=PackageLoader(u'document', u'templates'))
 
+import logging
+
+template_correctif = """
+[%s]
+nb_appels: %s 
+appels: %s
+"""
 class Charactere(object):
     """Caractère d'une ligne"""
     def __init__(self, char, ligne):
-        self.char = char
+        self.x2 = char['x2']
+        self.x1 = char['x1']
+        self.y1 = char['y1']
+        self.y2 = char['y2']
+        self.char = char['char']
         self.ligne = ligne
 
     @property
     def aire(self):
         """Aire de la boîte dans laquelle le caractère a été identifié"""
-        return (self.char['x2'] - self.char['x1']) * (self.char['y2'] - self.char['y1'])
+        return (self.x2 - self.x1) * (self.y2 - self.y1)
 
     @property
     def distance_baseline(self):
-        return self.char['y2'] - self.ligne.y2
+        return self.y2 - self.ligne.y2
 
     @property
     def hauteur(self):
-        return self.char['y2'] - self.char['y1']
+        return self.y2 - self.y1
 
     @property
     def centroide_vertical(self):
         """Calcule le centroide vertical du caractère"""
-        return self.char['y1'] + self.hauteur / 2 
+        return self.y1 + self.hauteur / 2 
+
+    def centroide_horizontal(self):
+        """Calcule le centroide horizontal du caractère"""
+        return self.y1 + self.longueur / 2
 
     @property
     def is_indice(self):
@@ -41,22 +56,22 @@ class Charactere(object):
     @property
     def is_appel(self):
         if self.is_indice and\
-           (self.char['char'].isalpha() or self.char['char'].isalnum()):
+           (self.char.isalpha() or self.char.isalnum()):
                     return True
         return False
-        d_y1 = ((self.char['y1'] - self.ligne.moy_y1) ** 2) ** .5
-        d_y2 = ((self.char['y2'] - self.ligne.moy_y2) ** 2) ** .5
+        d_y1 = ((self.y1 - self.ligne.moy_y1) ** 2) ** .5
+        d_y2 = ((self.y2 - self.ligne.moy_y2) ** 2) ** .5
       
         return (d_y1 / self.ligne.moy_d_y1, d_y2 / self.ligne.moy_d_y2)
 
     def __unicode__(self):
-         return str(self).decode('utf-8')
+        return self.char
 
     def __str__(self):
-        return str(self.char['char'])
+        return self.char.encode('utf-8')
 
     def __repr__(self):
-        return self.__str__()
+        return self.__unicode__()
     
 
 class Mot(object):
@@ -72,7 +87,7 @@ class Mot(object):
         for i in range(len(self.chars))[::-1]:
             c = self.chars[i]
             #On saute les ponctuations.
-            if not (c.char['char'].isalnum() or c.char['char'].isalpha()):
+            if not (c.char.isalnum() or c.char.isalpha()):
                  pass
             else:
                 return c.is_appel
@@ -80,18 +95,25 @@ class Mot(object):
     @property
     def mot_appel(self):
         appel = []
+        position_appel = len(self.chars)
         for i in range(len(self.chars))[::-1]:
+            position_appel -= 1
             c = self.chars[i]
-            print c
             if c.is_appel:
                 appel.insert(0, c)
             else:
                 break
         len_mot = len(self.chars) - len(appel)
-        return (self.chars[:len_mot], self.chars[len_mot:])
+        mot_appel = ""
+        mot = ""
+        for c in self.chars[:len_mot]:
+            mot = "%s%s" % (mot, c)
+        for c in appel:
+            mot_appel = "%s%s" % (mot_appel, c)
+        return (mot, mot_appel)
 
     def __unicode__(self):
-         return str(self).decode('utf-8')
+         return "".join(self.chars)
 
     def __str__(self):
        return "".join([str(c) for c in self.chars])
@@ -127,7 +149,7 @@ class Ligne(object):
 
             self.aire_moyenne = sum([c.aire for c in self.chars]) / len(self.chars) 
 
-            self.centroide_vertical = self.moy_y1 + self.moy_hauteur
+            self.centroide_vertical = self.moy_y1 + (self.moy_hauteur / 2)
 
             self.moy_d_y1 = sum([((c['y1'] - self.moy_y1) ** 2) ** .5 for c in chars])
             self.moy_d_y2 = sum([((c['y2'] - self.moy_y2) ** 2) ** .5 for c in chars])
@@ -199,7 +221,7 @@ class Page(object):
         self.txt = "%s.txt" % nom
         self.filename = os.path.splitext(self.txt)[0]
         self.lignes = []
-        print self.filename 
+        logging.debug(self.filename)
         path, filename = os.path.split(self.filename)
         groups = Page.m.match(filename)
         self.page_suivante = None
@@ -214,12 +236,16 @@ class Page(object):
 
         boxes = []
         try:
-            boxes = [{'char':b.split(' ')[0],
-                        'x1':int(b.split(' ')[1]),
-                        'y1':int(b.split(' ')[2]),
-                        'x2':int(b.split(' ')[3]),
-                        'y2':int(b.split(' ')[4])}
-                      for b in open("%s.box" % nom)]
+            f = codecs.open("%s.box" % nom, 'r', encoding='UTF-8')
+            try: 
+                for b in f:
+                        boxes.append({'char':b.split(' ')[0],
+                                'x1':int(b.split(' ')[1]),
+                                'y1':int(b.split(' ')[2]),
+                                'x2':int(b.split(' ')[3]),
+                            'y2':int(b.split(' ')[4])})
+            except UnicodeDecodeError:
+                pass
         except IndexError, e:
             """ Quelque chose est arrivé: par exemple on bute
             sur une page de couverture, ou une page mal formattée"""
@@ -228,9 +254,9 @@ class Page(object):
             """ Un fichier ne doit pas être là """
             return
         offset = 0
-        with open(self.txt) as f:
+        with codecs.open(self.txt, 'r', encoding='utf-8') as f:
             for ligne in f:
-                line = ligne.rstrip('\n').decode('utf-8')
+                line = ligne.rstrip('\n')
                 length = len(line.replace(' ', ''))
                 self.lignes.append(Ligne(line, boxes[offset:length+offset]))
                 offset += length
@@ -288,10 +314,28 @@ class Document(object):
     """Document numérisé"""
     def __init__(self, path):
         #Avoir uniquement les noms de fichiers
-        fichiers = sorted(list(set([os.path.splitext(f)[0] for f in os.listdir(path)])))
-        self.pages = [Page("%s/%s" % (path, f)) for f in fichiers]
+        fichiers = sorted(set([os.path.splitext(f)[0] for f in os.listdir(path)]))
+        self.path = path
+        self.pages = [Page("%s%s" % (path, f)) for f in fichiers]
 
     def as_html(self):
         for p in self.pages:
             print p.filename
             p.as_html()
+
+    def debug(self):
+        for p in self.pages:
+            logging.debug("====================")
+            logging.debug("Fichier: [%s]" % p.filename)
+            logging.debug("Nombre d'appels trouvés: [%s]" % len(p.appels))
+            logging.debug(p.appels)
+    def output_resultats(self):
+        """Retourne les résultats dans une fichier pouvant être
+        comparé avec le correctif"""
+        with open("%sresultats.ini" %self.path, 'w') as r:
+            for p in self.pages:
+                mot = ""
+                for mot, appel in p.appels:
+                    mot = "%s\t%s\n" % (mot, appel)
+                r.write(template_correctif % (p.filename, len(p.appels), mot))
+
