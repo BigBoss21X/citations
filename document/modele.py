@@ -5,7 +5,6 @@ import codecs
 import re
 from jinja2 import Environment, PackageLoader
 import numpy as np
-env = Environment(loader=PackageLoader(u'document', u'templates'))
 
 import logging
 
@@ -14,6 +13,13 @@ template_correctif = """
 nb_appels: %s 
 appels: %s
 """
+from evaluateur_appel import *
+def get_evaluateur(ligne):
+    ec = EvaluateurAppelComposite()
+    ec.add_evaluateur(EvaluateurAppelPositionLigne(ligne))
+    ec.add_evaluateur(EvaluateurAppelAlphaNum())
+    return ec
+
 class Charactere(object):
     """Caractère d'une ligne"""
     def __init__(self, char, ligne):
@@ -23,6 +29,7 @@ class Charactere(object):
         self.y2 = char['y2']
         self.char = char['char']
         self.ligne = ligne
+        self.eval = get_evaluateur(ligne)
 
     @property
     def aire(self):
@@ -55,12 +62,13 @@ class Charactere(object):
 
     @property
     def is_appel(self):
-        if self.is_indice and\
-           (self.char.isalpha() or self.char.isalnum()):
-                    return True
-        return False
-        d_y1 = ((self.y1 - self.ligne.moy_y1) ** 2) ** .5
-        d_y2 = ((self.y2 - self.ligne.moy_y2) ** 2) ** .5
+        #f self.is_indice and\
+        # #  (self.char.isalpha() or self.char.isalnum()):
+        # #           return True
+        #return False
+        #d_y1 = ((self.y1 - self.ligne.moy_y1) ** 2) ** .5
+        #d_y2 = ((self.y2 - self.ligne.moy_y2) ** 2) ** .5
+        return self.eval.is_appel(self)
       
         return (d_y1 / self.ligne.moy_d_y1, d_y2 / self.ligne.moy_d_y2)
 
@@ -130,6 +138,7 @@ class Ligne(object):
         self.y2 = 0
         self.moy_y1 = 0
         self.moy_y2 = 0
+        self.chars = []
         if chars:
             #
             # Calcul des métriques de la ligne
@@ -307,6 +316,7 @@ class Page(object):
         return appels
     def as_html(self):
         with codecs.open("%s.html" % self.filename, 'w', encoding='utf-8') as f:
+            env = Environment(loader=PackageLoader(u'document', u'templates'))
             template = env.get_template('page.html')
             f.write(template.render(page=self, lignes=self.lignes))
 

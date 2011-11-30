@@ -1,9 +1,34 @@
+#-*- coding: utf-8 -*-
+"""
+>>> from modele import Ligne, Document
+>>> print "allo"
+allo
+>>> d = Document("./test/")
+>>> len(d.pages)
+1
+>>> p = d.pages[0]
+>>> p.txt
+'./test/revuesociete01-100t.txt'
+>>> p.lignes[25]
+[loi, de, la, Cité19,, ils, ne, peuvent, pas, non, plus, reconnaître, aux, lois, de, la, nature, le]
+>>> l = p.lignes[25]
+>>> l.mots[3]
+Cité19,
+>>> m = l.mots[3]
+>>> [{'x1': c.x1, 'x2': c.x2, 'y1': c.y1, 'y2': c.y2, 'char': c.char} for c in m.chars]
+>>> print allo
+allo
+"""
+import numpy as np
+
+
 class MetriquesLigne(object):
     """Classe utilitaire qui calcule certaines métriques
     de la ligne, comme par exemple le centroïde vertical,
     l'aire moyenne des boîtes entourant les caractères,
     etc."""
     pass
+
 
 class EvaluateurAppelComposite(object):
     """L'évaluateur d'appel composite encapsule plusieurs
@@ -16,15 +41,16 @@ class EvaluateurAppelComposite(object):
 
     def add_evaluateur(self, evaluateur):
         """Ajoute un évaluateur à la liste d'évaluateurs"""
-        evaluateurs.append(evaluateur)
+        self.evaluateurs.append(evaluateur)
 
     def is_appel(self, char):
         """Retourne True uniquement si tous les évaluateurs contenus
         retournent True"""
-        for e in evaluateurs:
+        for e in self.evaluateurs:
             if not e.is_appel(char):
                 return False
         return True
+
 
 class EvaluateurAppel(object):
     """Classe abstraite qui évalue si le Caractère
@@ -60,7 +86,8 @@ class EvaluateurAppelPositionLigne(object):
     def is_appel(self, char):
         """Retourne True si le centroide vertical du caractères
         est plus élevé que celui de la ligne"""
-        return char.centroide_vertical > self.ligne.centroide_vertical 
+        return char.centroide_vertical > self.ligne.centroide_vertical
+
 
 class EvaluateurAppelPositionLigneRegression(object):
     """Calcule une droite de régression à partir des
@@ -70,8 +97,17 @@ class EvaluateurAppelPositionLigneRegression(object):
     si un caractère est un indice ou non"""
 
     def __init__(self, ligne):
-        centroides = [c.centroide_vertical for c in ligne.chars]
+        x = np.array([c.centroide_horizontal for c in ligne.chars])
+        y = np.array([c.centroide_vertical for c in ligne.chars])
+        self.p = None
+        if len(x) > 0 and len(y) > 0:
+            z = np.polyfit(x, y, 1)
+            self.p = np.poly1d(z)
 
+    def is_appel(self, char):
+        if not self.p:
+            return False
+        return char.centroide_vertical > self.p(char.centroide_horizontal)
 
 
 class EvaluateurAppelAlphaNum(object):
@@ -79,7 +115,8 @@ class EvaluateurAppelAlphaNum(object):
     appel s'il est un nombre ou une lettre"""
 
     def is_appel(self, char):
-        return char.isalpha() or char.isalnum()
+        return char.char.isalpha() or char.char.isalnum()
+
 
 class EvaluateurAireMoyenne(object):
     """Règle qui détermine qu'un caractère est utilisé comme
@@ -91,3 +128,7 @@ class EvaluateurAireMoyenne(object):
 
     def is_appel(self, char):
         return char.aire_moyenne < self.ligne.aire_moyenne
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
