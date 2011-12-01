@@ -18,6 +18,7 @@ def get_evaluateur(ligne):
     ec = EvaluateurAppelComposite()
     ec.add_evaluateur(EvaluateurAppelPositionLigne(ligne))
     ec.add_evaluateur(EvaluateurAppelAlphaNum())
+    ec.add_evaluateur(EvaluateurAppelTailleCaractere(ligne))
     return ec
 
 class Charactere(object):
