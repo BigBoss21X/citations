@@ -23,23 +23,17 @@ def get_evaluateur(ligne):
 
 class Charactere(object):
     """Caractère d'une ligne"""
-    def __init__(self, char, ligne):
+    def __init__(self, char):
         self.x2 = char['x2']
         self.x1 = char['x1']
         self.y1 = char['y1']
         self.y2 = char['y2']
         self.char = char['char']
-        self.ligne = ligne
-        self.eval = get_evaluateur(ligne)
 
     @property
     def aire(self):
         """Aire de la boîte dans laquelle le caractère a été identifié"""
         return (self.x2 - self.x1) * (self.y2 - self.y1)
-
-    @property
-    def distance_baseline(self):
-        return self.y2 - self.ligne.y2
 
     @property
     def hauteur(self):
@@ -53,25 +47,6 @@ class Charactere(object):
     def centroide_horizontal(self):
         """Calcule le centroide horizontal du caractère"""
         return self.y1 + self.longueur / 2
-
-    @property
-    def is_indice(self):
-        if (self.aire < self.ligne.aire_moyenne) and\
-           (self.centroide_vertical > self.ligne.centroide_vertical):
-                return True
-        return False
-
-    @property
-    def is_appel(self):
-        #f self.is_indice and\
-        # #  (self.char.isalpha() or self.char.isalnum()):
-        # #           return True
-        #return False
-        #d_y1 = ((self.y1 - self.ligne.moy_y1) ** 2) ** .5
-        #d_y2 = ((self.y2 - self.ligne.moy_y2) ** 2) ** .5
-        return self.eval.is_appel(self)
-      
-        return (d_y1 / self.ligne.moy_d_y1, d_y2 / self.ligne.moy_d_y2)
 
     def __unicode__(self):
         return self.char
@@ -91,24 +66,22 @@ class Mot(object):
     def __repr__(self):
         return self.__str__()
 
-    @property
-    def contient_appel(self):
+    def contient_appel(self, evaluateur):
         for i in range(len(self.chars))[::-1]:
             c = self.chars[i]
             #On saute les ponctuations.
             if not (c.char.isalnum() or c.char.isalpha()):
                  pass
             else:
-                return c.is_appel
+                return evaluateur.is_appel(c)
     
-    @property
-    def mot_appel(self):
+    def mot_appel(self, evaluateur):
         appel = []
         position_appel = len(self.chars)
         for i in range(len(self.chars))[::-1]:
             position_appel -= 1
             c = self.chars[i]
-            if c.is_appel:
+            if evaluateur.is_appel(c):
                 appel.insert(0, c)
             else:
                 break
@@ -130,6 +103,8 @@ class Mot(object):
 class Ligne(object):
     """Ligne d'une page"""
     def __init__(self,ligne, chars):
+
+
         #On trouve le X le plus à "gauche"
         self.ligne = ligne
         self.mots = []
@@ -144,7 +119,7 @@ class Ligne(object):
             #
             # Calcul des métriques de la ligne
             #
-            self.chars = [Charactere(c, self) for c in chars]
+            self.chars = [Charactere(c) for c in chars]
             self.x1 = sorted(chars, key=lambda a: a['x1'])[0]['x1']
             self.x2 = sorted(chars, key=lambda a: a['x2'], reverse=True)[0]['x2']
             self.y1 = sorted(chars, key=lambda a: a['y1'])[0]['y1']
@@ -170,6 +145,10 @@ class Ligne(object):
             for mot in ligne.split(' '):
                 self.mots.append(Mot(self.chars[m_index:m_index + len(mot)]))
                 m_index = m_index + len(mot)
+        self.evaluateur = EvaluateurAppelComposite()
+        self.evaluateur.add_evaluateur(EvaluateurAppelPositionLigne(self))
+        self.evaluateur.add_evaluateur(EvaluateurAppelAlphaNum())
+        self.evaluateur.add_evaluateur(EvaluateurAppelTailleCaractere(self))
 
     
     def __sub__(self, ligne):
@@ -179,8 +158,8 @@ class Ligne(object):
             raise ValueError("on peut uniquement soustraire\
                               une ligne d'une autre")
 
-        if isinstance(ligne, Separation):
-            return 0
+#        if isinstance(ligne, Separation):
+#            return 0
 
         if self.moy_y1 > ligne.moy_y2:
             return self.moy_y1 - ligne.moy_y2
@@ -190,7 +169,8 @@ class Ligne(object):
         
     @property
     def appels(self):
-        return [mot.mot_appel for mot in self.mots if mot.contient_appel] 
+        print self.evaluateur
+        return [mot.mot_appel(self.evaluateur) for mot in self.mots if mot.contient_appel(self.evaluateur)] 
     
 
     def __repr__(self):
@@ -199,25 +179,25 @@ class Ligne(object):
     def __str__(self):
         return str(self.mots)
 
-class Separation(Ligne):
-    def __init__(self):
-        self.mots = []
-        pass
+#class Separation(Ligne):
+#    def __init__(self):
+#        self.mots = []
+#        pass
 
-class PetiteSeparation(Separation):
-    def __init__(self):
-        self.mots = []
-        pass
+#class PetiteSeparation(Separation):
+#    def __init__(self):
+#        self.mots = []
+#        pass
 
-class MoyenneSeparation(Separation):
-    def __init__(self):
-        self.mots = []
-        pass
+#class MoyenneSeparation(Separation):
+#    def __init__(self):
+#        self.mots = []
+#        pass
 
-class GrandeSeparation(Separation):
-    def __init__(self):
-        self.mots = []
-        pass
+#class GrandeSeparation(Separation):
+#    def __init__(self):
+#        self.mots = []
+#        pass
 
 class Page(object):
     """Page d'un livre numérisé"""
@@ -282,12 +262,9 @@ class Page(object):
 
 
         #insérer des espaces "manuels" entre les lignes
-        nb_espaces = 1
         for i in range(len(self.distances)):
             espace = self.get_espace(self.distances[i])
-            if espace:
-                self.lignes.insert(nb_espaces, espace)
-                nb_espaces += 1
+            self.lignes[i].espace = espace
 
     def debug_distances(self):
         lignes2 = copy.deepcopy(self.lignes_orig)
@@ -303,11 +280,11 @@ class Page(object):
         """ Retourne le type d'espace requis pour une
         distance entre deux lignes """
         if abs(distance - self.moy_espaces) > self.std_espaces * 3:
-            return GrandeSeparation()
+            return 'grande'
 
         if abs(distance - self.moy_espaces) > self.std_espaces * .5:
-            return PetiteSeparation()
-        return None
+            return 'petite'
+        return 'aucune'
 
     @property
     def appels(self):
@@ -331,7 +308,6 @@ class Document(object):
 
     def as_html(self):
         for p in self.pages:
-            print p.filename
             p.as_html()
 
     def debug(self):
@@ -340,13 +316,14 @@ class Document(object):
             logging.debug("Fichier: [%s]" % p.filename)
             logging.debug("Nombre d'appels trouvés: [%s]" % len(p.appels))
             logging.debug(p.appels)
+
     def output_resultats(self):
         """Retourne les résultats dans une fichier pouvant être
         comparé avec le correctif"""
         with open("%sresultats.ini" %self.path, 'w') as r:
             for p in self.pages:
-                mot = ""
+                mot_a = ""
                 for mot, appel in p.appels:
-                    mot = "%s\t%s\n" % (mot, appel)
-                r.write(template_correctif % (p.filename, len(p.appels), mot))
+                    mot_a = "%s%s\t%s\n" % (mot_a, mot, appel)
+                r.write(template_correctif % (p.filename, len(p.appels), mot_a))
 

@@ -93,15 +93,13 @@ class EvaluateurAppelTailleCaractere(object):
     """Evalue la taille du caractere par rapport
     à celle des autres caractères de la ligne"""
     def __init__(self, ligne):
-        print ligne
-        for c in ligne.chars:
-            print "%s, %s" % (ligne.x1, ligne.x2)
-        tailles = [float((c.x2 - c.x1)) * float((c.y2 - c.y1)) for c in ligne.chars]
+        tailles = [c.aire for c in ligne.chars]
         self.taille_moyenne = 0 if len(ligne.chars) == 0\
                 else float(sum(tailles) / len(ligne.chars))
 
     def is_appel(self, char):
-        return ((char.x2 - char.x1) * (char.y2 - char.y1)) < 0.8 * self.taille_moyenne
+        is_appel = (char.aire < 0.6 * self.taille_moyenne)
+        return is_appel
 class EvaluateurAppelPositionLigneRegression(object):
     """Calcule une droite de régression à partir des
     centroïdes des caractères de la ligne.
