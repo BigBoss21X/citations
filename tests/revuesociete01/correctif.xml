@@ -1,0 +1,116 @@
+<document>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-001t</titre>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-002t</titre>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-003t</titre>
+    <appel>sujet." 1</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-004t</titre>
+    <appel>société"2</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-005t</titre>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-006t</titre>
+    <appel>personnes   5</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-007t</titre>
+    <appel>chercheurs. 6</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-008t</titre>
+    <appel>l'accès.    7</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-009t</titre>
+    <appel>vie.    8</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-010t</titre>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-011t</titre>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-012t</titre>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-013t</titre>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-014t</titre>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-015t</titre>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-016t</titre>
+    <appel>cycle   1</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-017t</titre>
+    <appel>1985    1</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-018t</titre>
+    <appel>travail 3</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-019t</titre>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-020t</titre>
+    <appel>cours   4</appel>
+    <appel>con1manditée    5</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-021t</titre>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-022t</titre>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-023t</titre>
+    <appel>découvrir   1</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-024t</titre>
+    <appel>retenue!    2</appel>
+    <appel>recherche.  3</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-025t</titre>
+    <appel>discipline  4</appel>
+    <appel>universités.    5</appel>
+    <appel>etc.    6</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-026t</titre>
+    <appel> [...]"    7</appel>
+    <appel> [...]". 8</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-027t</titre>
+    <appel>[...]"  9</appel>
+    <appel>importants."    10</appel>
+    <appel>naturelles. 11</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-028t</titre>
+    <appel>nue.    12</appel>
+    <appel>individuelles[...]" 13</appel>
+    <appel>idée".  14</appel>
+  </page>
+  <page>
+    <titre>./tests/revuesociete01/revuesociete01-029t</titre>
+    <appel>millions.   15 </appel>
+    <appel>d'or.   16</appel>
+  </page>
+</document>
