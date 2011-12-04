@@ -166,13 +166,20 @@ class ComparateurResultats(object):
 
         self.superflus = self.aut.resultats
 
+        
         self.nb_manquants = sum([len(p) for p in self.manquants.values()])
         self.nb_superflus = sum([len(p) for p in self.superflus.values()])
         self.nb_trouves = sum([len(p) for p in self.trouves.values()])
+    
+        self.precision = self.nb_trouves / float(self.nb_trouves + self.nb_superflus)
+        self.rappel = self.nb_trouves / float(self.ref.nb_appels)
+
 
     def output(self, fichier):
         with codecs.open(fichier, 'w', 'utf-8') as f:
             f.write('<resultats>\n')
+            f.write('\t<precision>%s</precision>\n' % self.precision)
+            f.write('\t<rappel>%s</rappel>\n' % self.rappel)
             if self.nb_trouves > 0:
                 f.write('\t<trouves>\n')
                 f.write('\t\t<nombre-trouve>%s</nombre-trouve>\n' % self.nb_trouves)

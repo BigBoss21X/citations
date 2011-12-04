@@ -92,13 +92,14 @@ class EvaluateurAppelPositionLigne(object):
 class EvaluateurAppelTailleCaractere(object):
     """Evalue la taille du caractere par rapport
     à celle des autres caractères de la ligne"""
-    def __init__(self, ligne):
+    def __init__(self, ligne, seuil=0.6):
         tailles = [c.aire for c in ligne.chars]
         self.taille_moyenne = 0 if len(ligne.chars) == 0\
                 else float(sum(tailles) / len(ligne.chars))
+        self.seuil = seuil
 
     def is_appel(self, char):
-        is_appel = (char.aire < 0.6 * self.taille_moyenne)
+        is_appel = (char.aire < self.seuil * self.taille_moyenne)
         return is_appel
 class EvaluateurAppelPositionLigneRegression(object):
     """Calcule une droite de régression à partir des
@@ -121,12 +122,22 @@ class EvaluateurAppelPositionLigneRegression(object):
         return char.centroide_vertical > self.p(char.centroide_horizontal)
 
 
+class EvaluateurAppelNum(object):
+    """Règle qui détermine qu'un caractère est utilisé
+    comme appel s'il est un nombre uniquement"""
+    def is_appel(self, char):
+        try:
+            int(char.char)
+            return True
+        except ValueError:
+            return False
+
 class EvaluateurAppelAlphaNum(object):
     """Règle qui détermine qu'un caractère est utilisé comme
     appel s'il est un nombre ou une lettre"""
 
     def is_appel(self, char):
-        return char.char.isalpha() or char.char.isalnum()
+        return char.char.isalnum()
 
 
 class EvaluateurAireMoyenne(object):

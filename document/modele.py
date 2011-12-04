@@ -16,9 +16,9 @@ appels: %s
 from evaluateur_appel import *
 def get_evaluateur(ligne):
     ec = EvaluateurAppelComposite()
+    ec.add_evaluateur(EvaluateurAppelNum())
     ec.add_evaluateur(EvaluateurAppelPositionLigne(ligne))
-    ec.add_evaluateur(EvaluateurAppelAlphaNum())
-    ec.add_evaluateur(EvaluateurAppelTailleCaractere(ligne))
+    ec.add_evaluateur(EvaluateurAppelTailleCaractere(ligne, seuil=0.6))
     return ec
 
 class Charactere(object):
@@ -83,6 +83,8 @@ class Mot(object):
             c = self.chars[i]
             if evaluateur.is_appel(c):
                 appel.insert(0, c)
+            elif not (c.char.isalnum() or c.char.isalpha()):
+                pass
             else:
                 break
         len_mot = len(self.chars) - len(appel)
@@ -147,7 +149,7 @@ class Ligne(object):
                 m_index = m_index + len(mot)
         self.evaluateur = EvaluateurAppelComposite()
         self.evaluateur.add_evaluateur(EvaluateurAppelPositionLigne(self))
-        self.evaluateur.add_evaluateur(EvaluateurAppelAlphaNum())
+        self.evaluateur.add_evaluateur(EvaluateurAppelNum())
         self.evaluateur.add_evaluateur(EvaluateurAppelTailleCaractere(self))
 
     
@@ -169,7 +171,6 @@ class Ligne(object):
         
     @property
     def appels(self):
-        print self.evaluateur
         return [mot.mot_appel(self.evaluateur) for mot in self.mots if mot.contient_appel(self.evaluateur)] 
     
 
