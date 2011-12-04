@@ -1,0 +1,14 @@
+Critères utilisés:
+
+-> Position ligne sans régression linéaire
+-> Appel numérique
+-> Taille caractèrei, seuil < 0.6
+
+Types d'erreurs:
+-> Dûes au skewing
+
+Erreurs pouvant être facilement éliminées:
+
+Précision augmentée à 100% depuis que les appels non numériques ont été éliminés
+
+Note: les règles ne sont pas les mêmes d'un chapitre à l'autre

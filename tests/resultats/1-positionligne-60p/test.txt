@@ -1,0 +1,22 @@
+Critères utilisés:
+
+-> Position ligne sans régression linéaire
+-> Appel alphanumérique
+-> Taille caractèrei, seuil < 0.6
+
+Types d'erreurs:
+-> Dûes au skewing
+-> Appel et mot trouvé, mais pas séparés
+Exemple:
+<page>
+	<titre>./tests/revuesociete01/revuesociete01-004t</titre>
+		<appel>
+			<indice>None</indice>
+			<terme>société"2,</terme>
+        </appel>
+
+Erreurs pouvant être facilement éliminées:
+-> Éliminer appels non numériques (ils sont inexistants)
+-> Éliminer appels inexistants
+
+Note: les règles ne sont pas les mêmes d'un chapitre à l'autre
