@@ -31,8 +31,22 @@ images d'un répertoire")
         help="Crée le document résidant à la racine")
     parser.add_argument('--creer-html', action='store_true',
         help='Crée le document HTML correspondant')
+    parser.add_argument('--comparaison', nargs=3,
+        help='Compare les deux fichiers')
+    
 
     parametres = parser.parse_args(sys.argv[1:len(sys.argv)])
+
+    if parametres.comparaison:
+        from resultats.analyse import FichierResultats, ComparateurResultats
+        ref_markup = "".join(open(parametres.comparaison[0]).readlines())
+        cmp_markup = "".join(open(parametres.comparaison[1]).readlines())
+
+        ref = FichierResultats(ref_markup)
+        cmp = FichierResultats(cmp_markup)
+
+        res = ComparateurResultats(ref, cmp)
+        res.output(parametres.comparaison[2])
 
     if parametres.creer_correctif:
         if not parametres.racine_document:

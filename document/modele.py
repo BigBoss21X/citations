@@ -320,10 +320,16 @@ class Document(object):
     def output_resultats(self):
         """Retourne les résultats dans une fichier pouvant être
         comparé avec le correctif"""
-        with open("%sresultats.ini" %self.path, 'w') as r:
+        with open("%sresultats.xml" %self.path, 'w') as r:
+            r.write('<document>')
             for p in self.pages:
-                mot_a = ""
+                r.write('<page>\n')
+                r.write('\t<titre>%s</titre>\n' % p.filename)
                 for mot, appel in p.appels:
-                    mot_a = "%s%s\t%s\n" % (mot_a, mot, appel)
-                r.write(template_correctif % (p.filename, len(p.appels), mot_a))
+                    r.write('\t<appel>\n')
+                    r.write('\t\t<indice>%s</indice>\n' % appel)
+                    r.write('\t\t<terme>%s</terme>\n' % mot)
+                    r.write('\t</appel>')
+                r.write('</page>')
+            r.write('</document>')
 

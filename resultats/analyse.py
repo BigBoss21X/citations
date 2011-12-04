@@ -80,8 +80,8 @@ True
 """
 
 
+import copy, codecs
 from BeautifulSoup import BeautifulStoneSoup
-import copy
 
 class FichierResultats(object):
     def __init__(self, markup):
@@ -132,6 +132,9 @@ class ComparateurResultats(object):
         self.ref = copy.deepcopy(reference)
         self.aut = copy.deepcopy(compare)
 
+        #Appels présents dans la référence et dans le comparé
+        self.trouves = {}
+
         #Appels présents dans la référence mais manquants dans l'autre
         self.manquants = {}
 
@@ -153,6 +156,9 @@ class ComparateurResultats(object):
                     else:
                         #On l'enlève: tous les appels qui resteront dans
                         #l'autre fichier seront les appels superflus.
+                        if p not in self.trouves:
+                            self.trouves[p] = {}
+                        self.trouves[p][a] = self.ref.resultats[p][a]
                         self.aut.resultats[p].pop(a)
                 #On enlève la page si elle ne contient pas d'appels
                 if len(self.aut.resultats[p]) == 0:
@@ -162,7 +168,47 @@ class ComparateurResultats(object):
 
         self.nb_manquants = sum([len(p) for p in self.manquants.values()])
         self.nb_superflus = sum([len(p) for p in self.superflus.values()])
+        self.nb_trouves = sum([len(p) for p in self.trouves.values()])
 
+    def output(self, fichier):
+        with codecs.open(fichier, 'w', 'utf-8') as f:
+            f.write('<resultats>\n')
+            if self.nb_trouves > 0:
+                f.write('\t<trouves>\n')
+                f.write('\t\t<nombre-trouve>%s</nombre-trouve>\n' % self.nb_trouves)
+                for p in sorted(self.trouves):
+                    f.write('\t\t<page>\n')
+                    f.write('\t\t\t<titre>%s</titre>\n' % p)
+                    for a in self.trouves[p]:
+                        f.write('\t\t\t<appel>\n')
+                        f.write('\t\t\t\t<indice>%s</indice>\n' % a)
+                        f.write('\t\t\t\t<terme>%s</terme>\n' % self.trouves[p][a])
+                    f.write('\t\t</page>\n')
+            if self.nb_manquants > 0:
+                f.write('\t<manquants>\n')
+                f.write('\t\t<nombre-manque>%s</nombre-manque>\n' % self.nb_manquants)
+                for p in sorted(self.manquants):
+                    f.write('\t\t<page>\n')
+                    f.write('\t\t\t<titre>%s</titre>\n' % p)
+                    for a in self.manquants[p]:
+                        f.write('\t\t\t<appel>\n')
+                        f.write('\t\t\t\t<indice>%s</indice>\n' % a)
+                        f.write('\t\t\t\t<terme>%s</terme>\n' % self.manquants[p][a])
+                    f.write('\t\t</page>\n')
+                f.write('\t</manquants>\n')
+            if self.nb_superflus > 0:
+                f.write('\t<superflus>\n')
+                f.write('\t\t<nombre-superflus>%s</nombre-superflus>\n' % self.nb_superflus)
+                for p in sorted(self.superflus):
+                    f.write('\t\t<page>\n')
+                    f.write('\t\t\t<titre>%s</titre>\n' % p)
+                    for a in self.superflus[p]:
+                        f.write('\t\t\t<appel>\n')
+                        f.write('\t\t\t\t<indice>%s</indice>\n' % a)
+                        f.write('\t\t\t\t<terme>%s</terme>\n' % self.superflus[p][a])
+                    f.write('\t\t</page>')
+                f.write('\t</superflus>')
+                f.write('</document>')
 
 if __name__ == '__main__':
     import doctest
