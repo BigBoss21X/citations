@@ -49,9 +49,17 @@
       <terme>vie.</terme>
       <indice>8</indice>
     </appel>
+    <appel>
+      <terme>petite.</terme>
+      <indice>9</indice>
+    </appel>
   </page>
   <page>
     <titre>./tests/revuesociete01/revuesociete01-010t</titre>
+    <appel>
+      <terme>humaines).</terme>
+      <indice>10</indice>
+    </appel>
   </page>
   <page>
     <titre>./tests/revuesociete01/revuesociete01-011t</titre>
