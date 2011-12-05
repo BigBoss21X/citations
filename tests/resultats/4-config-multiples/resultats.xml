@@ -1,0 +1,385 @@
+<document><page>
+	<titre>./tests/revuesociete01/.revuesociete01-006t.box</titre>
+</page><page>
+	<titre>./tests/revuesociete01/comparatif</titre>
+</page><page>
+	<titre>./tests/revuesociete01/correctif</titre>
+</page><page>
+	<titre>./tests/revuesociete01/resultats</titre>
+</page><page>
+	<titre>./tests/revuesociete01/revuesociete01-001t</titre>
+	<appel>
+		<indice>0</indice>
+		<terme>0</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-002t</titre>
+</page><page>
+	<titre>./tests/revuesociete01/revuesociete01-003t</titre>
+	<appel>
+		<indice>1</indice>
+		<terme>sujet."</terme>
+	</appel>	<appel>
+		<indice>1</indice>
+		<terme>1</terme>
+	</appel>	<appel>
+		<indice>1982</indice>
+		<terme>1</terme>
+	</appel>	<appel>
+		<indice>1085</indice>
+		<terme>1</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-004t</titre>
+	<appel>
+		<indice>2</indice>
+		<terme>société"2</terme>
+	</appel>	<appel>
+		<indice>200</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>2</indice>
+		<terme>2</terme>
+	</appel>	<appel>
+		<indice>7</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>1987</indice>
+		<terme>1</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-005t</titre>
+	<appel>
+		<indice>3</indice>
+		<terme>3</terme>
+	</appel>	<appel>
+		<indice>4</indice>
+		<terme>4</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-006t</titre>
+	<appel>
+		<indice>5</indice>
+		<terme>personnes</terme>
+	</appel>	<appel>
+		<indice>1</indice>
+		<terme>1</terme>
+	</appel>	<appel>
+		<indice>5</indice>
+		<terme>5</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-007t</titre>
+	<appel>
+		<indice>2</indice>
+		<terme>2</terme>
+	</appel>	<appel>
+		<indice>6</indice>
+		<terme>chercheurs.</terme>
+	</appel>	<appel>
+		<indice>6</indice>
+		<terme>6</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-008t</titre>
+	<appel>
+		<indice>7</indice>
+		<terme>l'accès.</terme>
+	</appel>	<appel>
+		<indice>7</indice>
+		<terme>7</terme>
+	</appel>	<appel>
+		<indice>1986</indice>
+		<terme>1</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-009t</titre>
+	<appel>
+		<indice>8</indice>
+		<terme>vie.</terme>
+	</appel>	<appel>
+		<indice>9</indice>
+		<terme>petite.</terme>
+	</appel>	<appel>
+		<indice>8</indice>
+		<terme>8</terme>
+	</appel>	<appel>
+		<indice>50</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>50</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>42</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>40</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>1987</indice>
+		<terme>1</terme>
+	</appel>	<appel>
+		<indice>8</indice>
+		<terme>8</terme>
+	</appel>	<appel>
+		<indice>9</indice>
+		<terme>9</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-010t</titre>
+	<appel>
+		<indice>10</indice>
+		<terme>humaines).</terme>
+	</appel>	<appel>
+		<indice>10</indice>
+		<terme>1</terme>
+	</appel>	<appel>
+		<indice>1990</indice>
+		<terme>1</terme>
+	</appel>	<appel>
+		<indice>1985</indice>
+		<terme>1</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-011t</titre>
+</page><page>
+	<titre>./tests/revuesociete01/revuesociete01-012t</titre>
+	<appel>
+		<indice>1971</indice>
+		<terme>1</terme>
+	</appel>	<appel>
+		<indice>207208</indice>
+		<terme>20</terme>
+	</appel>	<appel>
+		<indice>7</indice>
+		<terme>d'I-larvard</terme>
+	</appel>	<appel>
+		<indice>206</indice>
+		<terme>2</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-013t</titre>
+	<appel>
+		<indice>1987</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>13</indice>
+		<terme>1</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-014t</titre>
+</page><page>
+	<titre>./tests/revuesociete01/revuesociete01-015t</titre>
+</page><page>
+	<titre>./tests/revuesociete01/revuesociete01-016t</titre>
+	<appel>
+		<indice>1</indice>
+		<terme>cycle</terme>
+	</appel>	<appel>
+		<indice>1</indice>
+		<terme>1</terme>
+	</appel>	<appel>
+		<indice>8</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>1985</indice>
+		<terme>1</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-017t</titre>
+	<appel>
+		<indice>7</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>19852</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>9</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>1985</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>3</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>1986</indice>
+		<terme>1</terme>
+	</appel>	<appel>
+		<indice>1985</indice>
+		<terme></terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-018t</titre>
+	<appel>
+		<indice>3</indice>
+		<terme>travail</terme>
+	</appel>	<appel>
+		<indice>3</indice>
+		<terme>3</terme>
+	</appel>	<appel>
+		<indice>1012</indice>
+		<terme>(1</terme>
+	</appel>	<appel>
+		<indice>1985</indice>
+		<terme>1</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-019t</titre>
+</page><page>
+	<titre>./tests/revuesociete01/revuesociete01-020t</titre>
+	<appel>
+		<indice>4</indice>
+		<terme>cours4</terme>
+	</appel>	<appel>
+		<indice>5</indice>
+		<terme>con1manditée5</terme>
+	</appel>	<appel>
+		<indice>4</indice>
+		<terme>4</terme>
+	</appel>	<appel>
+		<indice>5</indice>
+		<terme>5</terme>
+	</appel>	<appel>
+		<indice>1986</indice>
+		<terme></terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-021t</titre>
+	<appel>
+		<indice>2</indice>
+		<terme>2</terme>
+	</appel>	<appel>
+		<indice>3</indice>
+		<terme>3</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-022t</titre>
+	<appel>
+		<indice>1986</indice>
+		<terme></terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-023t</titre>
+	<appel>
+		<indice>1</indice>
+		<terme>découvrir"1</terme>
+	</appel>	<appel>
+		<indice>1</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>1955</indice>
+		<terme>1</terme>
+	</appel>	<appel>
+		<indice>56</indice>
+		<terme>p.5</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-024t</titre>
+	<appel>
+		<indice>198081</indice>
+		<terme>19</terme>
+	</appel>	<appel>
+		<indice>2</indice>
+		<terme>retenue!</terme>
+	</appel>	<appel>
+		<indice>3</indice>
+		<terme>recherche.</terme>
+	</appel>	<appel>
+		<indice>2</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>1983</indice>
+		<terme>1</terme>
+	</appel>	<appel>
+		<indice>3</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>1986</indice>
+		<terme>1</terme>
+	</appel>	<appel>
+		<indice>92</indice>
+		<terme>p.9</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-025t</titre>
+	<appel>
+		<indice>4</indice>
+		<terme>discipline.</terme>
+	</appel>	<appel>
+		<indice>5</indice>
+		<terme>universités.</terme>
+	</appel>	<appel>
+		<indice>6</indice>
+		<terme>etc.</terme>
+	</appel>	<appel>
+		<indice>4</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>11</indice>
+		<terme>#1</terme>
+	</appel>	<appel>
+		<indice>5</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>198586</indice>
+		<terme>19</terme>
+	</appel>	<appel>
+		<indice>6</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>1985</indice>
+		<terme></terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-026t</titre>
+	<appel>
+		<indice>7</indice>
+		<terme>[...]"7</terme>
+	</appel>	<appel>
+		<indice>8</indice>
+		<terme>[...]".</terme>
+	</appel>	<appel>
+		<indice>7</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>8</indice>
+		<terme></terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-027t</titre>
+	<appel>
+		<indice>9</indice>
+		<terme>[...]"9</terme>
+	</appel>	<appel>
+		<indice>10</indice>
+		<terme>importants."</terme>
+	</appel>	<appel>
+		<indice>9</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>22</indice>
+		<terme>p.2</terme>
+	</appel>	<appel>
+		<indice>10</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>11</indice>
+		<terme></terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-028t</titre>
+	<appel>
+		<indice>12</indice>
+		<terme>nue.</terme>
+	</appel>	<appel>
+		<indice>13</indice>
+		<terme>individuelles[...]"1</terme>
+	</appel>	<appel>
+		<indice>14</indice>
+		<terme>idée".</terme>
+	</appel>	<appel>
+		<indice>12</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>169</indice>
+		<terme>p.16</terme>
+	</appel>	<appel>
+		<indice>13</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>14</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>1980</indice>
+		<terme>1</terme>
+	</appel></page><page>
+	<titre>./tests/revuesociete01/revuesociete01-029t</titre>
+	<appel>
+		<indice>16</indice>
+		<terme>d'or.</terme>
+	</appel>	<appel>
+		<indice>15</indice>
+		<terme></terme>
+	</appel>	<appel>
+		<indice>16</indice>
+		<terme></terme>
+	</appel></page></document>

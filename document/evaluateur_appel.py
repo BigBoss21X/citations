@@ -19,15 +19,67 @@ Cité19,
 >>> print allo
 allo
 """
+import ConfigParser
 import numpy as np
 
-
-class MetriquesLigne(object):
+class EvaluateurAppelFactory(object):
     """Classe utilitaire qui calcule certaines métriques
     de la ligne, comme par exemple le centroïde vertical,
     l'aire moyenne des boîtes entourant les caractères,
     etc."""
-    pass
+    def __init__(self, no_page, config=None):
+        self.config = config
+        self.section = None
+        if config:
+            self.cp = ConfigParser.ConfigParser()
+            self.cp.read(self.config)
+            for i in range(1, len(self.cp.sections())+1):
+                limite = self.cp.getint(str(i), 'page-limite')
+                if no_page < limite:
+                    self.section = str(i)
+                    break
+            if not self.section: self.section = '1'
+            print self.section
+
+    def get_evaluateur_appel(self, ligne):
+        e = EvaluateurAppelComposite()
+        if not self.config:
+            e.add_evaluateur(EvaluateurAppelPositionLigne(ligne))
+            e.add_evaluateur(EvaluateurAppelTailleCaractere(ligne))
+            e.add_evaluateur(EvaluateurAppelNum())
+            return e
+        else:
+            try:
+                position = self.cp.get(self.section, 'position')
+            except:
+                position = 'decalage'
+            try:
+                classe = self.cp.get(self.section, 'classe-caract')
+            except:
+                classe = 'numerique'
+            try:
+                taille = self.cp.get(self.section, 'taille-carac-appel')#, vars={'taille-carac-appel': 'a'})
+            except:
+                taille = None
+            print "=======[ section %s ]========" % self.section
+            if position == 'lineaire':
+                print "lineaire"
+                e.add_evaluateur(EvaluateurAppelPositionLigne(ligne))
+            if position == 'regression':
+                print "regression"
+                e.add_evaluateur(EvaluateurAppelPositionLigneRegression(ligne))
+            if position == 'decalage':
+                print "decalage"
+                e.add_evaluateur(EvaluateurAppelDecalageLigneRegression(ligne))
+            if classe == 'numerique':
+                print "numerique"
+                e.add_evaluateur(EvaluateurAppelNum())
+            if taille:
+                print "taille"
+                e.add_evaluateur(EvaluateurAppelTailleCaractere(ligne))
+            print "==================="
+            return e
+
 
 
 class EvaluateurAppelComposite(object):
@@ -101,6 +153,36 @@ class EvaluateurAppelTailleCaractere(object):
     def is_appel(self, char):
         is_appel = (char.aire < self.seuil * self.taille_moyenne)
         return is_appel
+
+class EvaluateurAppelDecalageLigneRegression(object):
+    """Calcule deux droites de régression pour les positions
+    en y1 et en y2 des caractères.
+
+    Un caractère est considéré comme appel si:
+        y1 > moyenne y1
+        y2 > moyenne y2
+    """
+    
+    def __init__(self, ligne):
+        self.is_init = False
+        x = np.array([np.float64(c.centroide_horizontal) for c in ligne.chars])
+        y1 = np.array([np.float64(c.y1) for c in ligne.chars])
+        y2 = np.array([np.float64(c.y2) for c in ligne.chars])
+
+        self.p_y1 = None
+        self.p_y2 = None
+        if len(x) and len(y1) and len(y2):
+            self.z_y1 = np.polyfit(x, y1, 1)
+            self.z_y2 = np.polyfit(x, y2, 1)
+            self.p_y1 = np.poly1d(self.z_y1)
+            self.p_y2 = np.poly1d(self.z_y2)
+            self.is_init = True
+
+    def is_appel(self, char):
+        if self.is_init:
+            return char.y1 > self.p_y1(char.centroide_horizontal) and\
+                char.y2 > self.p_y2(char.centroide_horizontal)
+
 class EvaluateurAppelPositionLigneRegression(object):
     """Calcule une droite de régression à partir des
     centroïdes des caractères de la ligne.
@@ -109,8 +191,8 @@ class EvaluateurAppelPositionLigneRegression(object):
     si un caractère est un indice ou non"""
 
     def __init__(self, ligne):
-        x = np.array([c.centroide_horizontal for c in ligne.chars])
-        y = np.array([c.centroide_vertical for c in ligne.chars])
+        x = np.array([np.float64(c.centroide_horizontal) for c in ligne.chars])
+        y = np.array([np.float64(c.centroide_vertical) for c in ligne.chars])
         self.p = None
         if len(x) > 0 and len(y) > 0:
             z = np.polyfit(x, y, 1)
@@ -119,7 +201,7 @@ class EvaluateurAppelPositionLigneRegression(object):
     def is_appel(self, char):
         if not self.p:
             return False
-        return char.centroide_vertical > self.p(char.centroide_horizontal)
+        return char.centroide_vertical > (self.p(char.centroide_horizontal))
 
 
 class EvaluateurAppelNum(object):
