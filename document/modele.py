@@ -14,12 +14,6 @@ nb_appels: %s
 appels: %s
 """
 from evaluateur_appel import *
-def get_evaluateur(ligne):
-    ec = EvaluateurAppelComposite()
-    ec.add_evaluateur(EvaluateurAppelNum())
-    ec.add_evaluateur(EvaluateurAppelPositionLigne(ligne))
-    ec.add_evaluateur(EvaluateurAppelTailleCaractere(ligne, seuil=0.6))
-    return ec
 
 class Charactere(object):
     """Caractère d'une ligne"""
@@ -44,9 +38,15 @@ class Charactere(object):
         """Calcule le centroide vertical du caractère"""
         return self.y1 + self.hauteur / 2 
 
+    @property
     def centroide_horizontal(self):
         """Calcule le centroide horizontal du caractère"""
-        return self.y1 + self.longueur / 2
+        return self.x1 + self.longueur / 2
+
+    @property
+    def longueur(self):
+        """Calcule la longueur du caractère"""
+        return self.x2 - self.x1;
 
     def __unicode__(self):
         return self.char
@@ -87,13 +87,14 @@ class Mot(object):
                 pass
             else:
                 break
-        len_mot = len(self.chars) - len(appel)
         mot_appel = ""
         mot = ""
-        for c in self.chars[:len_mot]:
+        for c in self.chars[:position_appel]:
             mot = "%s%s" % (mot, c)
         for c in appel:
             mot_appel = "%s%s" % (mot_appel, c)
+        if not mot or not mot_appel:
+            return None
         return (mot, mot_appel)
 
     def __unicode__(self):
@@ -104,7 +105,7 @@ class Mot(object):
 
 class Ligne(object):
     """Ligne d'une page"""
-    def __init__(self,ligne, chars):
+    def __init__(self,ligne, chars, factory):
 
 
         #On trouve le X le plus à "gauche"
@@ -147,10 +148,7 @@ class Ligne(object):
             for mot in ligne.split(' '):
                 self.mots.append(Mot(self.chars[m_index:m_index + len(mot)]))
                 m_index = m_index + len(mot)
-        self.evaluateur = EvaluateurAppelComposite()
-        self.evaluateur.add_evaluateur(EvaluateurAppelPositionLigne(self))
-        self.evaluateur.add_evaluateur(EvaluateurAppelNum())
-        self.evaluateur.add_evaluateur(EvaluateurAppelTailleCaractere(self))
+        self.evaluateur = factory.get_evaluateur_appel(self)
 
     
     def __sub__(self, ligne):
@@ -171,7 +169,7 @@ class Ligne(object):
         
     @property
     def appels(self):
-        return [mot.mot_appel(self.evaluateur) for mot in self.mots if mot.contient_appel(self.evaluateur)] 
+        return [mot.mot_appel(self.evaluateur) for mot in self.mots if mot.contient_appel(self.evaluateur) and mot.mot_appel(self.evaluateur)] 
     
 
     def __repr__(self):
@@ -205,7 +203,7 @@ class Page(object):
 
     m = re.compile('(?P<nom>\w*)-(?P<page>\d+).*')
 
-    def __init__(self, nom):
+    def __init__(self, nom, factory=None):
         """Initialise une page à partir de son boxfile et de son
            fichier tesseract"""
 
@@ -245,11 +243,13 @@ class Page(object):
             """ Un fichier ne doit pas être là """
             return
         offset = 0
+        if not factory:
+            factory = EvaluateurAppelFactory()
         with codecs.open(self.txt, 'r', encoding='utf-8') as f:
             for ligne in f:
                 line = ligne.rstrip('\n')
                 length = len(line.replace(' ', ''))
-                self.lignes.append(Ligne(line, boxes[offset:length+offset]))
+                self.lignes.append(Ligne(line, boxes[offset:length+offset], factory))
                 offset += length
    
         #Calcul des distances entre les lignes
@@ -301,11 +301,17 @@ class Page(object):
 
 class Document(object):
     """Document numérisé"""
-    def __init__(self, path):
+    def __init__(self, path, config=None):
         #Avoir uniquement les noms de fichiers
         fichiers = sorted(set([os.path.splitext(f)[0] for f in os.listdir(path)]))
         self.path = path
-        self.pages = [Page("%s%s" % (path, f)) for f in fichiers]
+
+        no_page = 1
+        self.pages = []
+        for f in fichiers:
+            self.pages.append(Page("%s%s" % (path, f), factory=EvaluateurAppelFactory(no_page,
+                      config=config)))
+            no_page += 1
 
     def as_html(self):
         for p in self.pages:

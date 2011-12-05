@@ -33,6 +33,8 @@ images d'un répertoire")
         help='Crée le document HTML correspondant')
     parser.add_argument('--comparaison', nargs=3,
         help='Compare les deux fichiers')
+    parser.add_argument('--config-evaluateurs', action='store',
+        help='Permet de spécifier la configuration des évaluateurs d\'appel')
     
 
     parametres = parser.parse_args(sys.argv[1:len(sys.argv)])
@@ -64,7 +66,10 @@ images d'un répertoire")
     if parametres.racine_document:
         print "Initialisation du document"
         logging.info("Initialisation du document")
-        d = modele.Document(parametres.racine_document)
+        config = None
+        if parametres.config_evaluateurs:
+            config = parametres.config_evaluateurs
+        d = modele.Document(parametres.racine_document, config=config)
         #d.debug()
         d.output_resultats()
         if parametres.creer_html:
