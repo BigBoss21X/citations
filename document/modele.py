@@ -78,6 +78,22 @@ class Mot(object):
     def mot_appel(self, evaluateur):
         appel = []
         position_appel = len(self.chars)
+
+        mot = "".join([c.char for c in self.chars])
+        if mot.startswith('p.'):
+            return None
+        if 'p' in mot:
+            print mot
+            try:
+                float(mot.replace('p', ''))
+                return None
+            except:
+                pass
+            try:
+                int(mot.replace('p', ''))
+                return None
+            except:
+                pass
         for i in range(len(self.chars))[::-1]:
             position_appel -= 1
             c = self.chars[i]
@@ -89,11 +105,17 @@ class Mot(object):
                 break
         mot_appel = ""
         mot = ""
-        for c in self.chars[:position_appel]:
+        for c in self.chars[:position_appel+1]:
             mot = "%s%s" % (mot, c)
         for c in appel:
             mot_appel = "%s%s" % (mot_appel, c)
         if not mot or not mot_appel:
+            return None
+        if mot == mot_appel:
+            return None
+        #print appel
+        if int(mot_appel) > 1000:
+            #print mot_appel
             return None
         return (mot, mot_appel)
 
@@ -106,7 +128,7 @@ class Mot(object):
 class Ligne(object):
     """Ligne d'une page"""
     def __init__(self,ligne, chars, factory):
-
+        self.espace = 'aucune'
 
         #On trouve le X le plus à "gauche"
         self.ligne = ligne
@@ -287,12 +309,28 @@ class Page(object):
             return 'petite'
         return 'aucune'
 
-    @property
-    def appels(self):
+    def get_appels(self):
         appels = []
         for l in self.lignes:
             appels.extend(l.appels)
+        self.appels = appels
         return appels
+    def notes_bas_de_page(self):
+        notes = []
+        lignes = []
+        trouvees = []
+        for l in self.lignes[::-1]:
+            lignes.insert(0,l)
+            for terme, indice in self.appels:
+                if not indice in trouvees:
+                    if l.ligne.startswith(indice):
+                        notes.append((indice, lignes))
+                        trouvees.append(indice)
+                        lignes = []
+            if len(notes) == len(self.appels):
+                break
+        return notes
+
     def as_html(self):
         with codecs.open("%s.html" % self.filename, 'w', encoding='utf-8') as f:
             env = Environment(loader=PackageLoader(u'document', u'templates'))
@@ -321,8 +359,8 @@ class Document(object):
         for p in self.pages:
             logging.debug("====================")
             logging.debug("Fichier: [%s]" % p.filename)
-            logging.debug("Nombre d'appels trouvés: [%s]" % len(p.appels))
-            logging.debug(p.appels)
+            logging.debug("Nombre d'appels trouvés: [%s]" % len(p.get_appels()()))
+            logging.debug(p.get_appels())
 
     def output_resultats(self):
         """Retourne les résultats dans une fichier pouvant être
@@ -332,7 +370,7 @@ class Document(object):
             for p in self.pages:
                 r.write('<page>\n')
                 r.write('\t<titre>%s</titre>\n' % p.filename)
-                for mot, appel in p.appels:
+                for mot, appel in p.get_appels():
                     r.write('\t<appel>\n')
                     r.write('\t\t<indice>%s</indice>\n' % appel)
                     r.write('\t\t<terme>%s</terme>\n' % mot)

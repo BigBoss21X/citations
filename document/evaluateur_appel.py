@@ -61,23 +61,23 @@ class EvaluateurAppelFactory(object):
                 taille = self.cp.get(self.section, 'taille-carac-appel')#, vars={'taille-carac-appel': 'a'})
             except:
                 taille = None
-            print "=======[ section %s ]========" % self.section
+            #print "=======[ section %s ]========" % self.section
             if position == 'lineaire':
-                print "lineaire"
+                #print "lineaire"
                 e.add_evaluateur(EvaluateurAppelPositionLigne(ligne))
             if position == 'regression':
-                print "regression"
+                #print "regression"
                 e.add_evaluateur(EvaluateurAppelPositionLigneRegression(ligne))
             if position == 'decalage':
-                print "decalage"
+                #print "decalage"
                 e.add_evaluateur(EvaluateurAppelDecalageLigneRegression(ligne))
             if classe == 'numerique':
-                print "numerique"
+                #print "numerique"
                 e.add_evaluateur(EvaluateurAppelNum())
             if taille:
-                print "taille"
+                #print "taille"
                 e.add_evaluateur(EvaluateurAppelTailleCaractere(ligne))
-            print "==================="
+            #print "==================="
             return e
 
 
