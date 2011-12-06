@@ -1,42 +1,42 @@
 <document><page>
-	<titre>./tests/revuesociete01/comparatif</titre>
+	<titre>./tests/materiel/revuesociete01/comparatif</titre>
 </page><page>
-	<titre>./tests/revuesociete01/correctif</titre>
+	<titre>./tests/materiel/revuesociete01/correctif</titre>
 </page><page>
-	<titre>./tests/revuesociete01/resultats</titre>
+	<titre>./tests/materiel/revuesociete01/resultats</titre>
 </page><page>
-	<titre>./tests/revuesociete01/revuesociete01-001t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-001t</titre>
 </page><page>
-	<titre>./tests/revuesociete01/revuesociete01-002t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-002t</titre>
 </page><page>
-	<titre>./tests/revuesociete01/revuesociete01-003t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-003t</titre>
 	<appel>
 		<indice>1</indice>
 		<terme>sujet</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-004t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-004t</titre>
 	<appel>
 		<indice>2</indice>
 		<terme>société</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-005t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-005t</titre>
 </page><page>
-	<titre>./tests/revuesociete01/revuesociete01-006t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-006t</titre>
 	<appel>
 		<indice>5</indice>
 		<terme>personnes</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-007t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-007t</titre>
 	<appel>
 		<indice>6</indice>
 		<terme>chercheurs</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-008t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-008t</titre>
 	<appel>
 		<indice>7</indice>
 		<terme>l'accès</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-009t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-009t</titre>
 	<appel>
 		<indice>8</indice>
 		<terme>vie</terme>
@@ -44,39 +44,39 @@
 		<indice>9</indice>
 		<terme>petite</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-010t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-010t</titre>
 	<appel>
 		<indice>10</indice>
 		<terme>humaines</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-011t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-011t</titre>
 </page><page>
-	<titre>./tests/revuesociete01/revuesociete01-012t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-012t</titre>
 </page><page>
-	<titre>./tests/revuesociete01/revuesociete01-013t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-013t</titre>
 </page><page>
-	<titre>./tests/revuesociete01/revuesociete01-014t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-014t</titre>
 </page><page>
-	<titre>./tests/revuesociete01/revuesociete01-015t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-015t</titre>
 </page><page>
-	<titre>./tests/revuesociete01/revuesociete01-016t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-016t</titre>
 	<appel>
 		<indice>1</indice>
 		<terme>cycle</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-017t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-017t</titre>
 	<appel>
 		<indice>2</indice>
 		<terme>1985</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-018t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-018t</titre>
 	<appel>
 		<indice>3</indice>
 		<terme>travail</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-019t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-019t</titre>
 </page><page>
-	<titre>./tests/revuesociete01/revuesociete01-020t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-020t</titre>
 	<appel>
 		<indice>4</indice>
 		<terme>cours</terme>
@@ -84,16 +84,16 @@
 		<indice>5</indice>
 		<terme>con1manditée</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-021t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-021t</titre>
 </page><page>
-	<titre>./tests/revuesociete01/revuesociete01-022t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-022t</titre>
 </page><page>
-	<titre>./tests/revuesociete01/revuesociete01-023t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-023t</titre>
 	<appel>
 		<indice>1</indice>
 		<terme>découvrir</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-024t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-024t</titre>
 	<appel>
 		<indice>22</indice>
 		<terme>2</terme>
@@ -110,7 +110,7 @@
 		<indice>3</indice>
 		<terme>recherche</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-025t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-025t</titre>
 	<appel>
 		<indice>4</indice>
 		<terme>discipline</terme>
@@ -127,7 +127,7 @@
 		<indice>85</indice>
 		<terme>19</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-026t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-026t</titre>
 	<appel>
 		<indice>7</indice>
 		<terme>[</terme>
@@ -138,7 +138,7 @@
 		<indice>24</indice>
 		<terme>2</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-027t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-027t</titre>
 	<appel>
 		<indice>25</indice>
 		<terme>(</terme>
@@ -155,7 +155,7 @@
 		<indice>11</indice>
 		<terme>1</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-028t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-028t</titre>
 	<appel>
 		<indice>12</indice>
 		<terme>nue</terme>
@@ -175,7 +175,7 @@
 		<indice>14</indice>
 		<terme>1</terme>
 	</appel></page><page>
-	<titre>./tests/revuesociete01/revuesociete01-029t</titre>
+	<titre>./tests/materiel/revuesociete01/revuesociete01-029t</titre>
 	<appel>
 		<indice>15</indice>
 		<terme>millions</terme>
