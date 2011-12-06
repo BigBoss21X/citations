@@ -14,6 +14,7 @@ nb_appels: %s
 appels: %s
 """
 from evaluateur_appel import *
+from bibliographie import bibliographie
 
 class Charactere(object):
     """Caractère d'une ligne"""
@@ -329,6 +330,11 @@ class Page(object):
                         lignes = []
             if len(notes) == len(self.appels):
                 break
+
+        for note in notes:
+            ligne = lambda a: [b.ligne for b in a]
+            texte = "".join(ligne(note[1]))
+            print bibliographie.get_bibtex(texte)
         return notes
 
     def as_html(self):
