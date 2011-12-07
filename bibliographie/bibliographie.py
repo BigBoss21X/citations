@@ -30,10 +30,12 @@ class ChercheurRessource(object):
         for engin in self.engins:
             url_requete = engin.url_recherche(entree)
             raw_res = urllib.urlopen(url_requete).read()
-            html = BeautifulStoneSoup(raw_res)
-            with open("url-%s" % self.fichier, 'w') as f:
-                f.write(raw_res)
-            self.fichier += 1
+            html = BeautifulSoup(raw_res)
+            gs_rt = html.find('div', { 'class' : 'gs_rt' })
+            if gs_rt:
+                link = gs_rt.find('a')
+                if link:
+                    return link.attrs[0][1]
 
 
 class EnginGoogle(object):
@@ -49,16 +51,4 @@ class EnginGoogle(object):
         return url
 
 if __name__ == '__main__':
-    biblio = bibtex.Parser().parse_file(sys.argv[1])
-    cr = ChercheurRessource([EnginGoogle('http://scholar.google.com/scholar?q=')])
-    for i in range(1,9):
-        print "======================================="
-        print "======================================="
-        with open('url-%s' % i) as f:
-            html = BeautifulSoup("".join(f.readlines()))
-            gs_rt = html.find('div', { 'class' : 'gs_rt' })
-            if gs_rt:
-                link = gs_rt.find('a')
-                if link:
-                    print link.attrs[0][1]
-
+    pass
