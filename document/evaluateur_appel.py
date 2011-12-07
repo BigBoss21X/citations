@@ -39,7 +39,6 @@ class EvaluateurAppelFactory(object):
                     self.section = str(i)
                     break
             if not self.section: self.section = '1'
-            print self.section
 
     def get_evaluateur_appel(self, ligne):
         e = EvaluateurAppelComposite()
