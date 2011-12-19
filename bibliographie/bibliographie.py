@@ -37,7 +37,7 @@ class ChercheurRessource(object):
                 if link:
                     return link.attrs[0][1]
 
-
+#TODO: implement requests using the ATOM API
 class EnginGoogle(object):
     def __init__(self, url_base):
         self.url_base = url_base
@@ -51,4 +51,14 @@ class EnginGoogle(object):
         return url
 
 if __name__ == '__main__':
+
+    engin_google = EnginGoogle('http://scholar.google.com/scholar?q=')
+    chercheur = ChercheurRessource([engin_google])
+
+    parser = bibtex.Parser()
+    bib_data = parser.parse_file(sys.argv[1])
+    for entry in bib_data.entries:
+        print "BibTeX entry: %s" % entry
+        print "URL: %s" % chercheur.chercher(bib_data.entries[entry])
+        print "==========="
     pass

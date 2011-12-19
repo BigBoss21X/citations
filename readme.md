@@ -95,12 +95,27 @@ Une fois le correctif complété, on souhaitera évaluer les résultats obtenus:
 
     $ python citations.py --comparaison-resultats /chemin/vers/correctif.xml /chemin/vers/resultats.xml /chemin/vers/comparatif.xml
 
-    Où:
-    * correctif.xml est le fichier correctif créé manuellement
-    * resultats.xml contient les résultats de l'évaluateur d'appels de notes de bas de page
-    * comparatif.xml sera créé et contiendra les résultats de comparaison.
+Où:
+* correctif.xml est le fichier correctif créé manuellement
+* resultats.xml contient les résultats de l'évaluateur d'appels de notes de bas de page
+* comparatif.xml sera créé et contiendra les résultats de comparaison.
 
 L'ordre des fichiers est important: les citations manquantes ou superflues seront évaluées en fonction du premier fichier. Si les fichiers sont inversés, les résultats seront aussi inversés.
 
 Extraire les références
 -----------------------
+Le module d'extraction de références peut être testé de la manière suivante:
+
+    $ python bibliographie/bibliographie.py /chemin/vers/fichier/BibTeX
+
+Un fichier BibTeX de test est fourni et est disponible à:
+
+    $ python bibliographie/bibliographie.py bibliographie/biblio.bib
+
+Étiquettage des ressources bibliographiques
+-------------------------------------------
+Un lanceur pour la librairie anystyle-wrapper a été écrit en ruby. Il peut être lancé avec la commande suivante:
+
+    $ ruby lib/anystyle-wrapper.rb "référence"
+
+Où référence est une référence bibliographique extraite du texte.
