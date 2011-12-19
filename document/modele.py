@@ -10,11 +10,11 @@ import logging
 
 template_correctif = """
 [%s]
-nb_appels: %s 
+nb_appels: %s
 appels: %s
 """
 from evaluateur_appel import *
-from bibliographie import bibliographie
+
 
 class Charactere(object):
     """Caractère d'une ligne"""
@@ -37,7 +37,7 @@ class Charactere(object):
     @property
     def centroide_vertical(self):
         """Calcule le centroide vertical du caractère"""
-        return self.y1 + self.hauteur / 2 
+        return self.y1 + self.hauteur / 2
 
     @property
     def centroide_horizontal(self):
@@ -47,7 +47,7 @@ class Charactere(object):
     @property
     def longueur(self):
         """Calcule la longueur du caractère"""
-        return self.x2 - self.x1;
+        return self.x2 - self.x1
 
     def __unicode__(self):
         return self.char
@@ -57,7 +57,9 @@ class Charactere(object):
 
     def __repr__(self):
         return self.__unicode__()
-    
+
+
+
 
 class Mot(object):
     """Mot sur une ligne d'une page"""
@@ -72,11 +74,11 @@ class Mot(object):
             c = self.chars[i]
             #On saute les ponctuations.
             if not (c.char.isalnum() or c.char.isalpha()):
-                 pass
+                pass
             else:
                 return evaluateur.is_appel(c)
-    
-    def mot_appel(self, evaluateur):
+
+    def identifier_appel(self, evaluateur):
         appel = []
         position_appel = len(self.chars)
 
@@ -84,7 +86,6 @@ class Mot(object):
         if mot.startswith('p.'):
             return None
         if 'p' in mot:
-            print mot
             try:
                 float(mot.replace('p', ''))
                 return None
@@ -106,7 +107,7 @@ class Mot(object):
                 break
         mot_appel = ""
         mot = ""
-        for c in self.chars[:position_appel+1]:
+        for c in self.chars[:position_appel + 1]:
             mot = "%s%s" % (mot, c)
         for c in appel:
             mot_appel = "%s%s" % (mot_appel, c)
@@ -121,7 +122,8 @@ class Mot(object):
         return (mot, mot_appel)
 
     def __unicode__(self):
-         return "".join(self.chars)
+        c = lambda char: [c.char for c in char]
+        return "".join(c(self.chars))
 
     def __str__(self):
        return "".join([str(c) for c in self.chars])
@@ -181,9 +183,6 @@ class Ligne(object):
             raise ValueError("on peut uniquement soustraire\
                               une ligne d'une autre")
 
-#        if isinstance(ligne, Separation):
-#            return 0
-
         if self.moy_y1 > ligne.moy_y2:
             return self.moy_y1 - ligne.moy_y2
         else:
@@ -192,7 +191,11 @@ class Ligne(object):
         
     @property
     def appels(self):
-        return [mot.mot_appel(self.evaluateur) for mot in self.mots if mot.contient_appel(self.evaluateur) and mot.mot_appel(self.evaluateur)] 
+        appels = []
+        for mot in self.mots:
+            m = mot.identifier_appel(self.evaluateur)
+            if m: appels.append(m)
+        return appels
     
 
     def __repr__(self):
@@ -200,26 +203,6 @@ class Ligne(object):
 
     def __str__(self):
         return str(self.mots)
-
-#class Separation(Ligne):
-#    def __init__(self):
-#        self.mots = []
-#        pass
-
-#class PetiteSeparation(Separation):
-#    def __init__(self):
-#        self.mots = []
-#        pass
-
-#class MoyenneSeparation(Separation):
-#    def __init__(self):
-#        self.mots = []
-#        pass
-
-#class GrandeSeparation(Separation):
-#    def __init__(self):
-#        self.mots = []
-#        pass
 
 class Page(object):
     """Page d'un livre numérisé"""
@@ -316,6 +299,7 @@ class Page(object):
             appels.extend(l.appels)
         self.appels = appels
         return appels
+
     def notes_bas_de_page(self):
         notes = []
         lignes = []
@@ -330,18 +314,29 @@ class Page(object):
                         lignes = []
             if len(notes) == len(self.appels):
                 break
-
-        for note in notes:
-            ligne = lambda a: [b.ligne for b in a]
-            texte = "".join(ligne(note[1]))
-            print bibliographie.get_bibtex(texte)
         return notes
 
     def as_html(self):
+
+        lignes = self.lignes
+        notes = self.notes_bas_de_page()
+        nbp = []
+        for note in notes:
+            for ligne in note[1]:
+                try:
+                    lignes.remove(ligne)
+                    nbp.append(ligne)
+                except:
+                    pass
+        print "======= NOTES ======="
+        print nbp
+        print "====================="
+        contenu = {'lignes': lignes, 'notes': nbp}
+
         with codecs.open("%s.html" % self.filename, 'w', encoding='utf-8') as f:
             env = Environment(loader=PackageLoader(u'document', u'templates'))
             template = env.get_template('page.html')
-            f.write(template.render(page=self, lignes=self.lignes))
+            f.write(template.render(page=self, contenu=contenu))
 
 class Document(object):
     """Document numérisé"""
@@ -360,6 +355,9 @@ class Document(object):
     def as_html(self):
         for p in self.pages:
             p.as_html()
+
+    def identifier_appels():
+        """Identifie les appels sur l'ensemble du document"""
 
     def debug(self):
         for p in self.pages:
@@ -383,4 +381,5 @@ class Document(object):
                     r.write('\t</appel>')
                 r.write('</page>')
             r.write('</document>')
+
 

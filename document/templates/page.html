@@ -3,20 +3,33 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link rel="stylesheet" href="css/page.css" type="text/css" media="screen" charset="utf-8"
 </head>
-{% if page.page_precedente %}
-    <a href="{{ page.page_precedente }}.html">Page précédente</a><br/>
-{% endif %}
-{% for ligne in lignes %}
-    {% for mot in ligne.mots %}
-        {% if mot.contient_appel %}
-            <span class="appel">{{ mot }}</span> 
-        {% else %}
-            {{ mot }}
-        {% endif %}
+<div class="page">
+  <div class="en-tete">
+    {% if page.page_precedente %}
+        <a href="{{ page.page_precedente }}.html">Page précédente</a><br/>
+    {% endif %}
+  </div>
+  <div class="corps">
+    {% for ligne in contenu['lignes'] %}
+      <p class="ligne">
+        {% for mot in ligne.mots %}
+        {{ mot }}
+        {% endfor %}
+        </p>
+            <br/>
     {% endfor %}
-        <br/>
-{% endfor %}
-{% if page.page_suivante %}
-    <a href="{{ page.page_suivante }}.html">Page suivante</a>
-{% endif %}
+  </div>
+  <div class="notes">
+    {% for ligne in contenu['notes'] %}
+      {% for mot in ligne.mots %}
+        <span class="appel">{{ mot }}</span>
+      {% endfor %}
+    {% endfor %}
+  </div>
+  <div class="pied-de-page">
+    {% if page.page_suivante %}
+        <a href="{{ page.page_suivante }}.html">Page suivante</a>
+    {% endif %}
+  </div>
+</div>
 </html>
