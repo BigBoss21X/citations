@@ -1,0 +1,47 @@
+Le premier choix a été d'utiliser les logiciels libres \emph{tesseract}~\cite{smith2007overview} et \emph{OCRopus}~\cite{breuel2008ocropus}. Ils ont été choisis car ils sont les références parmi les logiciels d'OCR publiés sous forme de logiciels libres et que la nature de ce projet ne justifie pas l'achat d'un produit commercial
+.
+OCRopus est un système d'analyse de document et de reconnaissance de caractère modulaire. Plusieurs scripts sont fournis pour faire la reconnaissance de mise en page de document et il est -- théoriquement -- possible d'utiliser différents modules de reconnaissance de caractère, bien que pour le moment un seul module soit fourni. Ce module est \emph{tesseract}, le logiciel de OCR à code source ouvert le plus mature et le plus précis. 
+
+Ocropus décrit la mise en page du document dans le format hOCR. Il s'agit en fait d'un document utilisant les balises HTML standard et auquel a été ajouté un ensemble de classes de style servant à donner de l'information supplémentaire sur la mise en page. Ces fichiers peuvent donc être lus par tout navigateur et la mise en page peut être transformée avec des feuilles de style CSS. Un exemple de fichier produit par OCRopus est présenté à la page~\pageref{sortie-ocropus}.
+
+À partir d'une image d'entrée, Tesseract peut produire deux types de fichiers: un fichier texte et un fichier de type \emph{boxfile}. Le fichier texte contient tous les caractères qui ont été reconnus par le logiciel, sans aucun formatage.
+
+Le fichier \emph{boxfile} est le fichier qui est utilisé pour entraîner tesseract à reconnaître de nouvelles langues. Il consiste en une série de ligne contenant chacune un caractère reconnu et les dimensions de la boîte faisant le contour de se caractère. Un exemple est présenté à la page~\pageref{sortie-tesseract}.
+
+\fontsize{3.5mm}{4.5mm}\selectfont
+\lstset{language=python}
+
+\begin{figure*}
+\begin{lstlisting}
+G 8 117 44 151 0
+r 46 117 65 140 0
+o 66 117 90 141 0
+u 92 117 120 140 0
+p 121 105 149 140 0
+e 153 117 174 140 0
+d 202 117 228 152 0
+' 232 134 240 151 0
+\end{lstlisting}
+\label{sortie-tesseract}
+\caption{Exemple de fichier boxfile produit par tesseract}
+\end{figure*}
+\fontsize{4.5mm}{6.5mm}\selectfont
+\begin{figure*}
+\fontsize{3.5mm}{4.5mm}\selectfont
+\lstset{inputencoding=utf8/latin1}
+\lstinputlisting[language=html]{code/giep-logo.html}
+\fontsize{4.5mm}{6.5mm}\selectfont
+\caption{Exemple de sortie OCRopus}
+\label{sortie-ocropus}
+\end{figure*}
+
+L'utilisation de OCRopus a finalement été rejetée pour de multiples raisons:
+\begin{enumerate}
+    \item Tesseract donne des résultats moins précis lorsqu'il est utilisé par OCRopus. Il est conçu pour travailler sur un seul caractère à la fois, mais OCRopus l'utilise pour travailler sur un segment de ligne complet;
+    \item Le support pour la langue française est absent lorsqu'on utilise Tesseract via OCRopus. Cela contribue à diminuer la précision de la reconnaissance faite par tesseract.
+    \item La documentation d'OCRopus est défaillante. Le code vient avec bon nombre de scripts de reconnaissance mais certains ne sont pas vraiment utilisables.
+\end{enumerate}
+
+Pour le prototype, les fonctionnalités intéressantes de OCRopus, c'est-à-dire l'information sur les coordonnées des lignes, ont pu être réimplémentées sans trop d'effort. 
+
+L'utilisation d'OCRopus aurait pu s'avérer plus avantageuse à long terme, et plus particulièrement pour le traitement de documents avec une mise en page complexe. Il faut rappeler que tesseract reconnaît les caractères, mais ignore complètement la mise en page du document, ce qui peut devenir une limitation dans le cas des documents ayant une mise en page complexe.

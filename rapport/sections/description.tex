@@ -1,0 +1,9 @@
+Dans ce projet, il l'objectif sera d'analyser un corpus de textes sociologiques afin d'en extraire les citations et d'obtenir les documents visés par celles-ci. Le matériau utilisé sera les archives de la revue \emph{Société} en format numérique.
+
+En utilisant \emph{OCRopus}, il sera possible de faire la reconnaissance de caractères sur l'image et d'obtenir des métriques sur la mise en page du document. Ces métriques sont typiquement la taille des colonnes, les tailles de chacune des lignes, et la taille de chacun des caractères.
+
+Dans un premier temps, un ensemble de texte sera créé et utilisé pour établir la possibilité d'implémenter un système expert dans lequel seraient codifiées les règles. Advenant le cas où un système expert s'avérerait inefficace -- ce qui reviendrait à dire que nous ne connaissons pas les règles qui permettent d'identifier correctement une citation, les efforts seraient dirigés vers l'implémentation d'un système intelligent qui apprendrait lesdites règles. Ce système devra convertir les citations identifiées en format BibTeX et sa précision sera évaluée selon la capacité du système à identifier correctement les différents attributs. Plusieurs types d'erreurs seront identifiées, pour différencier les cas où le système est responsable de la faute de ceux où il ne l'est pas (dans les cas par exemple où \emph{OCRopus} ferait une erreur de reconnaissance de caractère sur le chiffre d'appel de la note de bas de page)
+
+Une fois les fichiers BibTeX créés, il sera question d'obtenir la référence. Une distinction sera faite entre les références internes -- celles qui font partie du corpus utilisé et les références externes. La question d'un API générique permettant d'obtenir des références sera étudiée, mais ce document ne traitera que d'une seule implémentation concrète, celle de \emph{Google Books}.
+
+La question de la fidélité de la mise en page du document, bien que pertinente, ne sera pas traitée dans ce projet. 

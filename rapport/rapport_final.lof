@@ -1,0 +1,9 @@
+\select@language {french}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces D\IeC {\'e}coupage en paquetages du prototype}}{10}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Diagramme de classes du modele}}{11}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Diagramme de classes du module \IeC {\guillemotleft }\IeC {\'E}valuateurs d'appels\IeC {\guillemotright }}}{12}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Diagramme de classes du module r\IeC {\'e}sultats}}{13}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Exemple de fichier boxfile produit par tesseract}}{14}
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Exemple de sortie OCRopus}}{14}
+\contentsline {figure}{\numberline {1.7}{\ignorespaces Exemple de fichier DangAmbigs}}{20}
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Exemple de code Jinja2}}{26}

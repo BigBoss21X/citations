@@ -1,0 +1,12 @@
+\subsection{Sommaire des travaux réalisés}
+Des travaux ont été commencés pour implémenter une interface d'entraînement de Tesseract pour une nouvelle langue. L'interface permet à ce jour d'afficher l'image numérisée ainsi que les documents texte et \emph{boxfile} correspondants. Elle supporte les principaux cas d'utilisation, à savoir la modification de caractère, l'ajout de caractère manquant et la suppression de caractère erroné.
+
+Il a cependant été décidé après discussion d'abandonner cette voie au profit d'une autre jugée moins risquée. La proposition de projet a été jugée trop grande et insuffisamment bien définie pour avoir lieu dans le cadre d'un projet de fin d'études.
+
+Suite à la réorientation du projet, des travaux d'analyse, de conception et d'implémentation ont été entrepris dans le but de préparer l'implémentation des fonctionnalités maitresses. Un script a été implémenté pour pouvoir créer les documents \emph{hOcr} en vrac à partir des images numérisées. Une architecture a été élaborée et le début d'un script d'analyse de document \emph{hOcr} a été implémenté: il est donc établi qu'il sera possible d'avoir les attributs requis pour faire l'analyse.
+\subsection{Recommandations}
+\begin{enumerate}
+    \item Prototyper rapidement l'accès à l'API de Google Books afin de s'assurer que cette dépendance du projet ne posera pas problème. Vérifier particulièrement la manière de faire la recherche et s'il existe un api REST ou autre pour la faire.
+    \item Développer les composants de traduction en LaTeX et d'analyse de document conjointement pour s'assurer de la compatibilité des interfaces.
+\end{enumerate}
+
