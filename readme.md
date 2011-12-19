@@ -61,6 +61,8 @@ vous pouvez l'activer comme suit:
 
     # . env/bin/activate
 
+Les fichiers seront analysés dans l'ordre alphanumérique. Il est donc important que les noms de fichiers reflètent l'ordre des pages.
+
 Initialiser un répertoire
 -------------------------
 Initialiser le répertoire consiste à exécuter tesseract pour produire les fichiers texte et les boxfiles à partir de toutes les images présentes dans le répertoire racine.
@@ -80,6 +82,22 @@ Analyser les fichiers produits par tesseract
 L'analyse de répertoire est l'action par défaut qui est faite par le script. Un seul paramètre est requis: la racine du document
 
     $ python citations.py --racine-document /chemin/vers/répertoire
+
+Les résultats de l'analyse seront enregistrés dans /chemin/vers/répertoire/resultats.xml
+
+Spécifier des configurations pour les evaluateurs d'appel
+---------------------------------------------------------
+
+    $ python citations.py --racine-document /chemin/vers/répertoire --config-evaluateurs /chemin/vers/configuration.ini
+
+Où configuration.ini est le fichier ini contenant les configurations des évaluateurs d'appel. Pour plus d'inforamtion, voir evaluateurs_appel.ini fourni dans la racine de ce dépôt.
+
+Créer le document HTML correspondant
+--------------------------------
+
+    $ python citations.py --racine-document /chemin/vers/répertoire --creer-html
+
+Le document HTML sera disponible dans /chemin/vers/répertoire.
 
 Créer un correctif
 ------------------
@@ -118,4 +136,6 @@ Un lanceur pour la librairie anystyle-wrapper a été écrit en ruby. Il peut ê
 
     $ ruby lib/anystyle-wrapper.rb "référence"
 
-Où référence est une référence bibliographique extraite du texte.
+Où référence est une référence bibliographique extraite du texte, par exemple
+
+    $ ruby lib/anystyle-wrapper.rb "Karl Marx, l\'idéologie allemande, Paris, La Pléiade, 1982, p. 1085."
