@@ -10,7 +10,7 @@ import shutil
 from datetime import datetime
 
 from document import modele
-
+from time import time
 if __name__ == '__main__':
     #Configure le logger
     now = datetime.now()
@@ -58,9 +58,17 @@ images d'un répertoire")
         logging.info("Création du correctif")
         racine = parametres.racine_document
         fichiers = sorted(set([os.path.splitext(f)[0] for f in os.listdir(racine)]))
-        with open('%s/correctif.ini' % racine, 'w') as f:
+        with open('%s/correctif.xml' % racine, 'w') as f:
+            f.write("<document>");
             for fichier in fichiers:
-                f.write(modele.template_correctif % ("%s%s" %(racine, fichier),'',''))
+                f.write("\t<page>\n")
+                f.write("\t\t<titre>%s%s</titre>\n" % (racine, fichier))
+                f.write("\t\t<appel>\n")
+                f.write("\t\t\t<indice></indice>\n")
+                f.write("\t\t\t<terme></terme>\n")
+                f.write("\t\t</appel>\n")
+                f.write("\t</page>\n")
+            f.write("</document>\n")
         print "création du correctif"
 
     if parametres.racine_document:
@@ -69,7 +77,11 @@ images d'un répertoire")
         config = None
         if parametres.config_evaluateurs:
             config = parametres.config_evaluateurs
+
+        t1 = time()
         d = modele.Document(parametres.racine_document, config=config)
+        t2 = time()
+        print "Document créé en %s" % (t2 - t1)
         #d.debug()
         d.output_resultats()
         if parametres.creer_html:

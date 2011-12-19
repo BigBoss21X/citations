@@ -5,5 +5,6 @@
 \contentsline {figure}{\numberline {1.4}{\ignorespaces Diagramme de classes du module r\IeC {\'e}sultats}}{13}
 \contentsline {figure}{\numberline {1.5}{\ignorespaces Exemple de fichier boxfile produit par tesseract}}{14}
 \contentsline {figure}{\numberline {1.6}{\ignorespaces Exemple de sortie OCRopus}}{14}
-\contentsline {figure}{\numberline {1.7}{\ignorespaces Exemple de fichier DangAmbigs}}{20}
-\contentsline {figure}{\numberline {1.8}{\ignorespaces Exemple de code Jinja2}}{26}
+\contentsline {figure}{\numberline {1.7}{\ignorespaces Exemple d'erreur que fait l'EvaluateurPositionligne lorsque les lignes sont d\IeC {\'e}cal\IeC {\'e}es}}{17}
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Exemple de fichier DangAmbigs}}{21}
+\contentsline {figure}{\numberline {1.9}{\ignorespaces Exemple de code Jinja2}}{30}

@@ -20,9 +20,9 @@
 \contentsline {subsection}{\numberline {1.8.3}Extraction de citations}{15}
 \contentsline {subsubsection}{Identification de l'appel}{15}
 \contentsline {subsubsection}{\IeC {\'E}valuation de la m\IeC {\'e}thode}{16}
-\contentsline {subsubsection}{Probl\IeC {\`e}mes rencontr\IeC {\'e}s et am\IeC {\'e}liorations possibles}{17}
-\contentsline {subsubsection}{Extraction des m\IeC {\'e}ta-donn\IeC {\'e}es}{21}
-\contentsline {subsection}{\numberline {1.8.4}G\IeC {\'e}n\IeC {\'e}ration du document HTML}{24}
+\contentsline {subsubsection}{Probl\IeC {\`e}mes rencontr\IeC {\'e}s et am\IeC {\'e}liorations possibles}{19}
+\contentsline {subsubsection}{Extraction des m\IeC {\'e}tadonn\IeC {\'e}es}{21}
+\contentsline {subsection}{\numberline {1.8.4}G\IeC {\'e}n\IeC {\'e}ration du document HTML}{23}
 \contentsline {subsection}{\numberline {1.8.5}Acquisition des liens vers les r\IeC {\'e}f\IeC {\'e}rences bibliographiques}{26}
-\contentsline {subsection}{\numberline {1.8.6}Discussion}{27}
+\contentsline {subsection}{\numberline {1.8.6}Discussion}{26}
 \contentsline {subsection}{\numberline {1.8.7}Conclusion}{29}

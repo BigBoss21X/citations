@@ -18,6 +18,12 @@ Armin Brandl, Georg et~Ronacher.
 \newblock \url{http://jinja2.pocoo.org}.
 \newblock Consulté le 23 octobre 2011.
 
+\bibitem{breuel2008ocropus}
+T.M. Breuel.
+\newblock The ocropus open source ocr system.
+\newblock In {\em Proceedings IS\&T/SPIE 20th Annual Symposium}, volume 2008.
+  Citeseer, 2008.
+
 \bibitem{gamma1995design}
 E.~Gamma.
 \newblock {\em Design patterns: elements of reusable object-oriented software}.
@@ -60,6 +66,12 @@ Leonard Richardson.
 \newblock Beautiful soup.
 \newblock \url{www.crummy.com/software/beautifulsoup}.
 \newblock Consulté le 20 novembre 2011.
+
+\bibitem{smith2007overview}
+R.~Smith.
+\newblock An overview of the tesseract ocr engine.
+\newblock In {\em Document Analysis and Recognition, 2007. ICDAR 2007. Ninth
+  International Conference on}, volume~2, pages 629--633. Ieee, 2007.
 
 \bibitem{pythonorg}
 Guido Van~Rossum.

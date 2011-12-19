@@ -1,3 +1,7 @@
+Glossaire
+=========
+* Répertoire source: répertoire dans lequel se trouvent les images à numériser.
+
 Installation
 ============
 À un moment où un autre le projet utilise les dépendances suivantes:
@@ -51,7 +55,7 @@ Le gem résultant peut ensuite être installé:
 
 Utilisation
 ===========
-
+:
 Si vous utilisez un environnement virtuel, vous devez l'activer au préalable. Si vous l'avez appellé "env",
 vous pouvez l'activer comme suit:
 
@@ -59,15 +63,44 @@ vous pouvez l'activer comme suit:
 
 Initialiser un répertoire
 -------------------------
+Initialiser le répertoire consiste à exécuter tesseract pour produire les fichiers texte et les boxfiles à partir de toutes les images présentes dans le répertoire racine.
+
+    # python citations.py --initialiser-répertoire /chemin/vers/répertoire/racine
+
+Les fichiers box et txt seront créés dans la répertoire spécifié. Les fichiers présents dans le répertoire racine doivent être en format tif. Si jamais il sont en format png peut être faite par le script:
+
+    # python citations.py --initialiser-repertoire /chemin/vers/répertoire/racine --conversion-tif
+
+Si les fichiers sont dans un autre format, elle devra être faite «manuellement»
+    
+    $ mogrify -format tif /chemin/vers/répertoire/racine/*.png
 
 Analyser les fichiers produits par tesseract
 --------------------------------------------
+L'analyse de répertoire est l'action par défaut qui est faite par le script. Un seul paramètre est requis: la racine du document
+
+    $ python citations.py --racine-document /chemin/vers/répertoire
 
 Créer un correctif
 ------------------
+Pour comparer les résultats obtenus par l'évaluateur d'appel, il faut d'abord créer un correctif:
+
+    $ python citations.py --racine-document /chemin/vers/répertoire --creer-correctif
+
+Un fichier nommé correctif.xml sera créé dans le répertoire. Un appel est présent par page. Cette balise peut être enlevée ou dupliquée dépendemment du nombre d'appel dans la page.
 
 Comparer les résultats obtenus à ceux du correctif
 --------------------------------------------------
+Une fois le correctif complété, on souhaitera évaluer les résultats obtenus:
+
+    $ python citations.py --comparaison-resultats /chemin/vers/correctif.xml /chemin/vers/resultats.xml /chemin/vers/comparatif.xml
+
+    Où:
+    * correctif.xml est le fichier correctif créé manuellement
+    * resultats.xml contient les résultats de l'évaluateur d'appels de notes de bas de page
+    * comparatif.xml sera créé et contiendra les résultats de comparaison.
+
+L'ordre des fichiers est important: les citations manquantes ou superflues seront évaluées en fonction du premier fichier. Si les fichiers sont inversés, les résultats seront aussi inversés.
 
 Extraire les références
 -----------------------
