@@ -1,0 +1,9 @@
+L'objectif premier d'une référence bibliographique est d'aider le lecteur à se procurer une copie de l'ouvrage référencé. La codification de la référence bibliographique est l'abstraction sur laquelle repose le classement. Les clés de classement sont les mêmes d'une bibliothèque à l'autre bien que la disposition physique des livres et des collections peut varier.
+
+Le prototype est capable de trouver une ressource bibliographique sur Google Scholar à partir d'une référence Bibtex. Son implémentation est naïve dans la mesure où le prototype fait la recherche de la même manière dont un être humain la ferait.
+
+\emph{Google Scholar} accepte différents paramètres de recherche. On peut par exemple spécifier \emph{intitle} pour chercher dans le titre ou encore \emph{inauthor} pour chercher parmi les noms d'auteurs. Le prototype créera dans un premier temps l'URL de recherche en traduisant les différents de la référence bibtex dans leur équivalent supporté par \emph{Google Scholar}.
+
+La recherche est ensuite faite en utilisant la librairie \emph{urllib} fournie avec la distribution standard de python~\cite{pythonorg}. Cette librairie se charge essentiellement de lancer le "GET" et de gérer les possibles exceptions. Une fois la page retournée, le prototype extraira le premier résultat en BeautifulSoup~\cite{beautifulsoup}, une librairie XML axée sur l'extraction de contenu dans des fichiers HTML.\footnote{Elle se spécialise dans l'extraction de contenu dans la mesure où elle n'est pas optimisée pour la performance, mais plutôt pour être robuste et être capable de travailler avec un fichier extrêmement mal formatté.}
+
+La librairie a été testée avec l'ensemble de test de \emph{anystyle-parser} et a été capable de récupérer toutes les références.  

@@ -1,0 +1,21 @@
+Tout au long du projet, le \emph{document} a été le modèle avec lequel nous avons travaillé. Dans le même ordre d'idées, il est facile de considérer le document produit comme étant une vue dans le paradigme \emph{modèle-vue-contrôleur} (MVC). Ainsi, le document devient le modèle abstrait, tandis que la représentation HTML devient la vue qui représente ce document. Le contrôleur pourrait être une classe tierce qui apporterait des modifications au modèle à partir d'information reçue par la vue (si l'on implémente une vue HTML, cette vue pourrait être un ensemble de boîtes de saisie de texte).
+
+Dans cette optique, la mise en page devient l'action d'appliquer une vue précise au modèle de document. Le patron modèle-vue-contrôleur suggère que, pour simplifier l'implémentation et la rendre plus facile à maintenir, il est nécessaire de préserver l'indépendance entre la vue et le modèle. Ainsi, le modèle ne doit pas contenir d'information concernant sa représentation tout comme la vue ne doit pas contenir de code exprimant une logique interne au modèle (par exemple, la vue ne doit pas contenir de code servant à déterminer si une partie du texte est un appel).
+
+Pour notre implémentation du MVC, nous avons utilisé une librairie de gabarits (de \emph{templating} en anglais). Ces librairies sont couramment utilisées dans les implémentations web du patron MVC. En effet, depuis qu'ils ont été popularisés avec \emph{Ruby on Rails}, les templates ont été présents dans toutes les librairies web récentes. En ce qui concerne python, plusieurs librairies sont disponibles, par exemple \emph{Mako} et \emph{Jinja2}. 
+
+La manière de rédiger un gabarit varie très peu d'un système à l'autre. Si les systèmes de gabarit présentent quelques différences du point de vue de la syntaxe, ils reposent tous sur le même principe: les gabarits sont écrits dans un format choisi par l'utilisateur (HTML, LaTeX, Markdown, etc.). Le texte du gabarit n'est pas compilé et l'utilisateur est libre d'écrire ce qu'il veut, à l'exception de certains mots-clé réservés qui permettent de coder une logique de mise en page. Ces mots-clés servent par exemple d'interrroger des variables, de faire des boucles, etc. En outre, le gabarit est produit par l'appel d'une fonction python standard, et les variables auxquels il a accès sont celles qui ont été fournies lors de l'appel de la fonction.
+
+Pour notre système, le choix du système de gabarits n'est pas critique. Ils n'ont pas de grande différence du point de vue de l'implémentation, et leurs différences concernent souvent leur implémentation dans un \emph{framework} web python donné. Étant donné que nos gabarits sont hors ligne (ils sont exécutés au plus une seule fois, pour générer le fichier HTML). Pour le projet, \emph{Jinja2} a été utilisé étant donné qu'il est le plus petit et plus simple à mettre en place, bien qu'il soit réputé plus lent que son concurrent \emph{mako}.\footnote{voir http://stackoverflow.com/questions/1324238/what-is-the-fastest-template-system-for-python}
+\begin{figure*}
+\begin{lstlisting}
+<div class="document">
+    {% for ligne in lignes %}
+        <span class="ligne">{{ ligne }}</span>
+    {% endfor %}
+</div>
+
+\end{lstlisting}
+\caption{Exemple de code Jinja2}{Cet exemple de code Jinja2 présente l'itération d' une liste. Si la variable lignes contenait trois lignes, par exemple, le document HTML résultant contiendrait les trois lignes, chacune entourée de sa balise span}
+\end{figure*}
+En résumé, l'utilisation d'un système de gabarits permet d'avoir une implémentation simple et concise. Puisque le système de gabarits implémente le patron MVC, il est facile de fournir différentes du même document: chacun de ces formats est considéré comme une vue et est implémentée dans son propre fichier. Dans ce projet, il a été question de la représentation HTML du document, mais il aurait été tout aussi simple de le faire en LaTeX, et il serait possible d'ajouter la sortie LaTeX sans modifier le code du modèle.

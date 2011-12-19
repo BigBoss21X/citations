@@ -1,0 +1,28 @@
+\select@language {french}
+\contentsline {section}{\numberline {1.1}Glossaire}{4}
+\contentsline {section}{\numberline {1.2}Introduction}{5}
+\contentsline {section}{\numberline {1.3}Probl\IeC {\'e}matique et contexte}{5}
+\contentsline {section}{\numberline {1.4}Description}{6}
+\contentsline {subsection}{\numberline {1.4.1}Objectifs}{7}
+\contentsline {section}{\numberline {1.5}M\IeC {\'e}thodologie}{7}
+\contentsline {section}{\numberline {1.6}Livrables et planification}{8}
+\contentsline {subsection}{\numberline {1.6.1}Description des art\IeC {\'e}facts}{8}
+\contentsline {subsection}{\numberline {1.6.2}Planification}{8}
+\contentsline {section}{\numberline {1.7}Risques}{8}
+\contentsline {section}{\numberline {1.8}Impl\IeC {\'e}mentation}{8}
+\contentsline {subsection}{\numberline {1.8.1}Architecture}{8}
+\contentsline {subsubsection}{Diagramme de paquetage}{9}
+\contentsline {subsubsection}{Diagramme des modules}{9}
+\contentsline {subsubsection}{Diagramme de classe du mod\IeC {\`e}le}{10}
+\contentsline {subsubsection}{Diagramme de classe du module r\IeC {\'e}sultats}{10}
+\contentsline {subsubsection}{Diagramme de classe du module Evaluateurs d'appels}{12}
+\contentsline {subsection}{\numberline {1.8.2}Reconnaissance de mise en page et de caract\IeC {\`e}re}{13}
+\contentsline {subsection}{\numberline {1.8.3}Extraction de citations}{15}
+\contentsline {subsubsection}{Identification de l'appel}{15}
+\contentsline {subsubsection}{\IeC {\'E}valuation de la m\IeC {\'e}thode}{16}
+\contentsline {subsubsection}{Probl\IeC {\`e}mes rencontr\IeC {\'e}s et am\IeC {\'e}liorations possibles}{17}
+\contentsline {subsubsection}{Extraction des m\IeC {\'e}ta-donn\IeC {\'e}es}{21}
+\contentsline {subsection}{\numberline {1.8.4}G\IeC {\'e}n\IeC {\'e}ration du document HTML}{24}
+\contentsline {subsection}{\numberline {1.8.5}Acquisition des liens vers les r\IeC {\'e}f\IeC {\'e}rences bibliographiques}{26}
+\contentsline {subsection}{\numberline {1.8.6}Discussion}{27}
+\contentsline {subsection}{\numberline {1.8.7}Conclusion}{29}

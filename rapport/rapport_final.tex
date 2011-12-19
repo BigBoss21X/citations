@@ -1,0 +1,182 @@
+\documentclass[12pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage{lmodern}
+\usepackage{colortbl}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\usepackage{color}
+\usepackage{ucs}
+\usepackage{placeins}
+\usepackage[french]{babel}
+\usepackage{datetime}
+\usepackage{graphicx}
+\usepackage{lscape}
+\usepackage[toc,page]{appendix} 
+\usepackage{listingsutf8}
+\definecolor{grey}{rgb}{.9,0.9,0.9}
+\setlength\voffset{0.3in}
+\setlength\headheight{25pt}
+\usepackage{url} 
+\lstset{ % general style for listings 
+   numbers=left 
+   , tabsize=2 
+   , frame=single 
+   , breaklines=true 
+   , basicstyle=\ttfamily 
+   , numberstyle=\tiny\ttfamily 
+   , framexleftmargin=13mm 
+   , backgroundcolor=\color{grey} 
+   , xleftmargin=12mm 
+   , frameround={tttt} 
+   , captionpos=b 
+} 
+\lstdefinestyle{xslt} 
+{ 
+    emph={xsl,template,variable,param,for,each,apply,templates,with,param} 
+    , emphstyle=\color{magenta} 
+    , emph={[2]match, select, name, mode} 
+    , emphstyle={[2]\color{cyan}} 
+}
+\usepackage{multirow}
+\usepackage{geometry}
+%% We will completely define our own header strings, so switch the fancy
+%% headers on, but nuke all the default values. (Note that this package
+%% *has* to load after the geometry package!)
+
+\usepackage{fancyhdr}
+\renewcommand{\headrulewidth}{0pt}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\lfoot{Auteur: David Cormier (DC)}
+\lhead{
+    \begin{tabular}{| l | c | r | c | c |}
+      \hline
+      \multirow{2}{*}{Ecole de technologie superieure} & Cours: LOG792 & Document: 1 & Date: \today & Version 1\\ \cline{2-5}
+& \multicolumn{2}{|r|}{Rapport d'etape} & \multicolumn{2}{|r|}{\pageref{LastPage} pages} \\
+\hline
+    \end{tabular}
+}
+\chead{}
+\rhead{}
+\usepackage[utf8x]{inputenc}
+\usepackage{geometry}
+\geometry{left=3cm, right=2cm, top=2cm}
+
+
+\title{Rapport d'étape}
+\author{David Cormier}
+\begin{document}
+\input{./title.tex}
+\tableofcontents
+\newpage
+\listoffigures
+\listoftables
+\newpage
+\onehalfspacing
+\setcounter{chapter}{1}
+\section{Glossaire}
+%\fontsize{4.5mm}{6.5mm}\selectfont
+\begin{tabular}{| p{3cm} | p{12cm} |}
+    \rowcolor[gray]{0.9} \hline
+    Terme & Définition \\ \hline
+    \emph{boxfile} & Document spécifiant, pour chacun des caractères numérisés par \emph{Tesseract}, la position et la dimension du carré à l'intérieur duquel le caractère a été identifié \\ \hline
+    \emph{hOCR} & Fichier HTML utilisant des métadonnées pour décrire les attributs d'un document numérisé (positions et dimensions des lignes, nombre de colonnes, etc.) \\ \hline
+    \emph{Tesseract} & Logiciel de reconnaissance de caractère développé par Hewlett-Packard dans les années 90 et maintenant développé en \emph{open source} sous la gouverne de Google. \\ \hline
+    \emph{HTML} & \emph{HyperText Markup Language}, standard utilisé pour les pages WEB \\ \hline
+    \emph{CSS} & \emph{Cascading Style Sheets}. Tandis que les fichiers HTML décrivent la structure du document, les fichiers CSS en décrivent le style.
+\end{tabular}
+\newpage
+
+
+\section{Introduction}
+\input{./sections/introduction.tex}
+
+\section{Problématique et contexte}
+\input{./sections/problematique.tex}
+
+\section{Description}
+\input{./sections/description.tex}
+
+\subsection{Objectifs}
+\input{./sections/objectifs.tex}
+
+\section{Méthodologie}
+\input{./sections/methodologie.tex}
+
+\section{Livrables et planification}
+\input{./sections/livrables.tex}
+
+\section{Implémentation}
+\subsection{Architecture}
+\input{./sections/architecture.tex}
+
+\subsection{Reconnaissance de mise en page et de caractère}
+\input{./sections/reconnaissance.tex}
+
+\subsection{Extraction de citations}
+\input{./sections/extraction.tex}
+
+\subsection{Génération du document HTML}
+\input{./sections/miseenpage.tex}
+
+\subsection{Acquisition des liens vers les références bibliographiques}
+\input{./sections/acquisition.tex}
+
+\subsection{Discussion}
+\input{./sections/discussion.tex}
+
+\subsection{Conclusion}
+\input{./sections/conclusion.tex}
+
+\section*{Annexe A: Plan de travail révisé}
+%\fontsize{3.5mm}{3.5mm}\selectfont
+\begin{table}
+\begin{tabular}{| p{.5cm} | p{2cm} | p{2cm} | p{1.2cm} | p{1.5cm} | p{3.5cm} | p{3.5cm} |}
+    \hline
+    \rowcolor[gray]{0.9}
+    \# & Commencé & Terminé & Effort estimés & Efforts actuels & Tâches & Livrable(s) \\
+     \hline 
+     1 & 25 oct 2011 & 25 oct 2011 & 1h & .5h & Remise de la fiche de renseignements & Fiche de renseignements \\
+     \hline
+     2 & 2 oct 2011 & 2 oct 2011 & .5h & .5h & Description du projet / discussion avec professeur superviseur &  \\
+     \hline
+     3 & 10 oct 2011 & 10 oct 2011 & 10h & 5h & Remise de la proposition de projet & Proposition de projet  \\
+     \hline
+     4 & 7 oct 2011 & 14 oct 2011 & 10h & 20h & Analyse des outils d'entraînement pour tesseract et OCRopus. Programmation d'une interface d'entraînement pour Tesseract & Code source \\
+     \hline
+     5 & 15 oct 2011 & 15 oct 2011 & 1h & 1.5h & Rencontre avec C. Desrosiers & \\
+     \hline
+     6 & 20 oct 2011 & 27 oct 2011 & 5h & 10h & Rédaction du rapport d'étape & Rapport d'étape \\
+     \hline
+     7 & 20 oct 2011 & 21 oct 2011 & 4h & 8h & Élaboration et comparaison de deux architectures possibles pour résoudre le problème & Rapport final, section « Implémentation » \\
+     \hline
+     8 & 15 oct. 2011 & 15 oct. 2011 & .5h & 4h & Configuration de l'environnement de développement -- installation/compilation d'OCRopus & \\
+    \hline
+     9 & & & 15h & & Implémentation du composant d'analyse de document et d'identification de références & Code source \\
+    \hline
+    10 & & & 20h & & Implémentation du composant de conversion de \emph{hOcr} en LaTeX & Code source \\
+    \hline
+    11 & & & 1h & & Rencontre de suivi avec C. Desrosiers &  \\
+    \hline
+    12 & & & 5h & & Prototypage de l'accès à Google Books & Code source \\
+    \hline
+    13 & & & 15h & & Implémentation du module d'accès aux références & Code Source \\
+    \hline
+    14 & & & 10h & & Rédaction de la section \emph{Implémentation} du rapport final & Rapport final \\
+    \hline
+    15 & & & 5h & & Conversion des références en format BibTex & Code source \\ 
+    \hline
+    16 & & & 10h & & Rédaction des autres sections du rapport final & Rapport final \\
+    \hline
+    17 & & & .5h & & Présentation du projet & \\
+    \hline
+\end{tabular}
+\caption{Plan de travail}
+\end{table}
+\bibliographystyle{plain}
+\nocite{rubylang}
+\nocite{jinja2}
+\nocite{makotemplates}
+\nocite{pybtex}
+\bibliography{biblio}
+\end{document}

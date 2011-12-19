@@ -1,0 +1,70 @@
+\begin{thebibliography}{10}
+
+\bibitem{afzal2009improving}
+M.T. Afzal, W.T. Balke, H.~Maurer, and N.~Kulathuramaiyer.
+\newblock Improving citation mining.
+\newblock In {\em Networked Digital Technologies, 2009. NDT'09. First
+  International Conference on}, pages 116--121. IEEE, 2009.
+
+\bibitem{makotemplates}
+Michael Bayer.
+\newblock Mako templates.
+\newblock \url{http://makotemplates.org}.
+\newblock Consulté le 23 octobre 2011.
+
+\bibitem{jinja2}
+Armin Brandl, Georg et~Ronacher.
+\newblock The jinja2 template engine.
+\newblock \url{http://jinja2.pocoo.org}.
+\newblock Consulté le 23 octobre 2011.
+
+\bibitem{gamma1995design}
+E.~Gamma.
+\newblock {\em Design patterns: elements of reusable object-oriented software}.
+\newblock Addison-Wesley Professional, 1995.
+
+\bibitem{pybtex}
+Andrey Golovizin.
+\newblock Pybtex.
+\newblock \url{http://pybtex.sourceforge.net/}.
+\newblock Consulté le 16 décembre 2011.
+
+\bibitem{anystyleparser}
+Sylvester Keil.
+\newblock Anystyle-parser.
+\newblock \url{https://github.com/inukshuk/anystyle-parser}.
+\newblock Consulté le 17 novembre 2011.
+
+\bibitem{rubylang}
+Yukihiro Matsumoto.
+\newblock The ruby programming language.
+\newblock \url{http://ruby-lang.org}.
+\newblock Consulté le 2 décembre 2011.
+
+\bibitem{sinatrarb}
+Blake Mizerany.
+\newblock The sinatra web server.
+\newblock \url{http://github.com/sinatra/sinatra}.
+\newblock Consulté le 2 décembre 2011.
+
+\bibitem{oreillyarchitecture}
+Tim O'Reilly.
+\newblock The architecture of participation.
+\newblock
+  \url{http://oreilly.com/pub/a/oreilly/tim/articles/architecture_of_participa%
+tion.html}.
+\newblock Consulté le 15 décembre 2011.
+
+\bibitem{beautifulsoup}
+Leonard Richardson.
+\newblock Beautiful soup.
+\newblock \url{www.crummy.com/software/beautifulsoup}.
+\newblock Consulté le 20 novembre 2011.
+
+\bibitem{pythonorg}
+Guido Van~Rossum.
+\newblock The python programming language.
+\newblock \url{http://python.org}.
+\newblock Consulté le 20 septembre 2011.
+
+\end{thebibliography}
