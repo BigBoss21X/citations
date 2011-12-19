@@ -51,7 +51,7 @@ précision = \frac{\|trouves\|}{\|trouves + superflus\|}
     \rowcolor[gray]{0.9}
     EvaluateurAppel & Description \\
     \hline
-    EvaluateurAppelPosition\linebreak Ligne & Détermine si un caractère est utilisé comme appel à partir de l'écart entre son centroïde vertical et le centroïde vertical de la ligne. Le centroïde vertical de la ligne est calculé à partir de la moyenne des positions y1 et y2 de chacun des caractères contenus dans celle-ci. Un caractère est identifié comme un appel si son centroïde vertical est plus haut que celui de la ligne. Cette méthode est rapide, mais elle est inefficace dans le cas où le document a été numérisé avec un biais et que la ligne n'est pas droite. \\
+    EvaluateurAppelPosition\linebreak Ligne & Détermine si un caractère est utilisé comme appel à partir de l'écart entre son centroïde vertical et le centroïde vertical de la ligne. Le centroïde vertical de la ligne est calculé à partir de la moyenne des positions y1 et y2 de chacun des caractères contenus dans celle-ci. Un caractère est identifié comme un appel si son centroïde vertical est plus haut que celui de la ligne. Cette méthode est rapide, mais elle est inefficace dans le cas où le document a été numérisé avec un biais et que la ligne n'est pas droite. Pour un exemple d'erreur voir~\ref{erreur-evaluateurpositionligne} \\
     \hline
     EvaluateurAppelTaille\linebreak Caractere & Détermine si un caractère est un appel en comparant son aire à l'aire moyenne des caractères de la même ligne. Le caractère est indentifié comme étant un appel si le rapport de son aire sur l'aire moyenne est en-deça d'un certain seuil spécifié par l'utilisateur. \\
     \hline
@@ -64,6 +64,11 @@ précision = \frac{\|trouves\|}{\|trouves + superflus\|}
     EvaluateurAppelDecalage\linebreak LigneRegression & Un caractère est identifié comme un appel s'il est en décalage avec la ligne. Le décalage est calculé en utilisant les positions y1 et y2 du caractère et en les comparant avec les deux droites de régression passant par les positions y1 et y2 des caractères de la ligne. \\
     \hline
 \end{tabular}
+\begin{figure*}
+\centerline{\includegraphics{figures/exemple-ligne-decalee.png}}
+\caption{Exemple d'erreur que fait l'EvaluateurPositionligne lorsque les lignes sont décalées}{Dans cette image, la ligne rouge représente le centroide vertical, qui est calculé pour être entre les y1 moyen et les y2 moyen de la ligne. Vu que la ligne est décalée, certaines lettres se trouvent à être plus haut que le centroïde vertical et sont alors considérées comme des appels}
+\label{erreur-evaluateurpositionligne}
+\end{figure*}
 \label{tableau-evaluateurs}
 \caption{Évaluateurs d'appels utilisés dans le prototype}
 \end{table}
